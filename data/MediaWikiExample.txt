@@ -7,12 +7,12 @@
 Any other start ends the list.
 
 * combine bullet list
-** with definition 
+** with definition
 ::- definition
 ** creates empty space
 
 * combine bullet list
-** with definition 
+** with definition
 *:- definition
 ** without empty spaces
 

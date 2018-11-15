@@ -1,4 +1,4 @@
-package io.daos;
+package io.dao;
 
 public class ExampleDAO {
 }

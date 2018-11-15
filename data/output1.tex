@@ -582,19 +582,14 @@ This is, in UNIX:
 \begin{verbatim}
 $HOME/.pandoc
 \end{verbatim}
-
 in Windows XP:
-
 \begin{verbatim}
 C:\Documents And Settings\USERNAME\Application Data\pandoc
 \end{verbatim}
-
 and in Windows Vista or later:
-
 \begin{verbatim}
 C:\Users\USERNAME\AppData\Roaming\pandoc
 \end{verbatim}
-
 You can find the default user data directory on your system by looking
 at the output of \texttt{pandoc\ -\/-version}. A \texttt{reference.odt},
 \texttt{reference.docx}, \texttt{epub.css}, \texttt{templates},
@@ -603,7 +598,6 @@ this directory will override pandoc's normal defaults.
 \item[\texttt{-\/-bash-completion}]
 Generate a bash completion script. To enable bash completion with
 pandoc, add this to your \texttt{.bashrc}:
-
 \begin{verbatim}
 eval "$(pandoc --bash-completion)"
 \end{verbatim}
@@ -3291,18 +3285,14 @@ the boundaries of the separator line after the header:
 | Bananas       | $1.34         | built-in wrapper   |
 +---------------+---------------+--------------------+
 \end{verbatim}
-
 For headerless tables, the colons go on the top line instead:
-
 \begin{verbatim}
 +--------------:+:--------------+:------------------:+
 | Right         | Left          | Centered           |
 +---------------+---------------+--------------------+
 \end{verbatim}
-
 \hypertarget{grid-table-limitations}{%
 \subparagraph{Grid Table Limitations}\label{grid-table-limitations}}
-
 Pandoc does not support grid tables with row spans or column spans. This
 means that neither variable numbers of columns across rows nor variable
 numbers of rows across columns are supported by Pandoc. All grid tables
@@ -3310,34 +3300,27 @@ must have the same number of columns in each row, and the same number of
 rows in each column. For example, the Docutils
 \href{http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html\#grid-tables}{sample
 grid tables} will not render as expected with Pandoc.
-
 \hypertarget{extension-pipe_tables}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{pipe\_tables}}{Extension: pipe\_tables}}\label{extension-pipe_tables}}
-
 Pipe tables look like this:
-
 \begin{verbatim}
 | Right | Left | Default | Center |
 |------:|:-----|---------|:------:|
 |   12  |  12  |    12   |    12  |
 |  123  |  123 |   123   |   123  |
 |    1  |    1 |     1   |     1  |
-
   : Demonstration of pipe table syntax.
 \end{verbatim}
-
 The syntax is identical to
 \href{https://michelf.ca/projects/php-markdown/extra/\#table}{PHP
 Markdown Extra tables}. The beginning and ending pipe characters are
 optional, but pipes are required between all columns. The colons
 indicate column alignment as shown. The header cannot be omitted. To
 simulate a headerless table, include a header with blank cells.
-
 Since the pipes indicate column boundaries, columns need not be
 vertically aligned, as they are in the above example. So, this is a
 perfectly legal (though ugly) pipe table:
-
 \begin{verbatim}
 fruit| price
 -----|-----:
@@ -3345,7 +3328,6 @@ apple|2.05
 pear|1.37
 orange|3.09
 \end{verbatim}
-
 The cells of pipe tables cannot contain block elements like paragraphs
 and lists, and cannot span multiple lines. If a pipe table contains a
 row whose printable content is wider than the column width (see
@@ -3357,79 +3339,60 @@ would make the first column 3/4 and the second column 1/4 of the full
 text width.) On the other hand, if no lines are wider than column width,
 then cell contents will not be wrapped, and the cells will be sized to
 their contents.
-
 Note: pandoc also recognizes pipe tables of the following form, as can
 be produced by Emacs' orgtbl-mode:
-
 \begin{verbatim}
 | One | Two   |
 |-----+-------|
 | my  | table |
 | is  | nice  |
 \end{verbatim}
-
 The difference is that \texttt{+} is used instead of
 \texttt{\textbar{}}. Other orgtbl features are not supported. In
 particular, to get non-default column alignment, you'll need to add
 colons as above.
-
 \hypertarget{metadata-blocks}{%
 \subsection{Metadata blocks}\label{metadata-blocks}}
-
 \hypertarget{extension-pandoc_title_block}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{pandoc\_title\_block}}{Extension: pandoc\_title\_block}}\label{extension-pandoc_title_block}}
-
 If the file begins with a title block
-
 \begin{verbatim}
 % title
 % author(s) (separated by semicolons)
 % date
 \end{verbatim}
-
 it will be parsed as bibliographic information, not regular text. (It
 will be used, for example, in the title of standalone LaTeX or HTML
 output.) The block may contain just a title, a title and an author, or
 all three elements. If you want to include an author but no title, or a
 title and a date but no author, you need a blank line:
-
 \begin{verbatim}
 %
 % Author
-
 % My title
 %
 % June 15, 2006
 \end{verbatim}
-
 The title may occupy multiple lines, but continuation lines must begin
 with leading space, thus:
-
 \begin{verbatim}
 % My title
   on multiple lines
 \end{verbatim}
-
 If a document has multiple authors, the authors may be put on separate
 lines with leading space, or separated by semicolons, or both. So, all
 of the following are equivalent:
-
 \begin{verbatim}
 % Author One
   Author Two
-
 % Author One; Author Two
-
 % Author One;
   Author Two
 \end{verbatim}
-
 The date must fit on one line.
-
 All three metadata fields may contain standard inline formatting
 (italics, links, footnotes, etc.).
-
 Title blocks will always be parsed, but they will affect the output only
 when the \texttt{-\/-standalone} (\texttt{-s}) option is chosen. In HTML
 output, titles will appear twice: once in the document head -- this is
@@ -3440,7 +3403,6 @@ head can have an optional prefix attached (\texttt{-\/-title-prefix} or
 class ``title'', so it can be suppressed or reformatted with CSS. If a
 title prefix is specified with \texttt{-T} and no title block appears in
 the document, the title prefix will be used by itself as the HTML title.
-
 The man page writer extracts a title, man page section number, and other
 header and footer information from the title line. The title is assumed
 to be the first word on the title line, which may optionally end with a
@@ -3449,29 +3411,21 @@ between the title and the parentheses.) Anything after this is assumed
 to be additional footer and header text. A single pipe character
 (\texttt{\textbar{}}) should be used to separate the footer text from
 the header text. Thus,
-
 \begin{verbatim}
 % PANDOC(1)
 \end{verbatim}
-
 will yield a man page with the title \texttt{PANDOC} and section 1.
-
 \begin{verbatim}
 % PANDOC(1) Pandoc User Manuals
 \end{verbatim}
-
 will also have ``Pandoc User Manuals'' in the footer.
-
 \begin{verbatim}
 % PANDOC(1) Pandoc User Manuals | Version 4.0
 \end{verbatim}
-
 will also have ``Version 4.0'' in the header.
-
 \hypertarget{extension-yaml_metadata_block}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{yaml\_metadata\_block}}{Extension: yaml\_metadata\_block}}\label{extension-yaml_metadata_block}}
-
 A YAML metadata block is a valid YAML object, delimited by a line of
 three hyphens (\texttt{-\/-\/-}) at the top and a line of three hyphens
 (\texttt{-\/-\/-}) or three dots (\texttt{...}) at the bottom. A YAML
@@ -3480,17 +3434,14 @@ the beginning, it must be preceded by a blank line. (Note that, because
 of the way pandoc concatenates input files when several are provided,
 you may also keep the metadata in a separate YAML file and pass it to
 pandoc as an argument, along with your Markdown files:
-
 \begin{verbatim}
 pandoc chap1.md chap2.md chap3.md metadata.yaml -s -o book.html
 \end{verbatim}
-
 Just be sure that the YAML file begins with \texttt{-\/-\/-} and ends
 with \texttt{-\/-\/-} or \texttt{...}.) Alternatively, you can use the
 \texttt{-\/-metadata-file} option. Using that approach however, you
 cannot reference content (like footnotes) from the main markdown input
 document.
-
 Metadata will be taken from the fields of the YAML object and added to
 any existing document metadata. Metadata can contain lists and objects
 (nested arbitrarily), but all string scalars will be interpreted as
@@ -3499,23 +3450,19 @@ pandoc. (They may be given a role by external processors.) Field names
 must not be interpretable as YAML numbers or boolean values (so, for
 example, \texttt{yes}, \texttt{True}, and \texttt{15} cannot be used as
 field names).
-
 A document may contain multiple metadata blocks. The metadata fields
 will be combined through a \emph{left-biased union}: if two metadata
 blocks attempt to set the same field, the value from the first block
 will be taken.
-
 When pandoc is used with \texttt{-t\ markdown} to create a Markdown
 document, a YAML metadata block will be produced only if the
 \texttt{-s/-\/-standalone} option is used. All of the metadata will
 appear in a single block at the beginning of the document.
-
 Note that YAML escaping rules must be followed. Thus, for example, if a
 title contains a colon, it must be quoted. The pipe character
 (\texttt{\textbar{}}) can be used to begin an indented block that will
 be interpreted literally, without need for escaping. This form is
 necessary when the field contains blank lines or block-level formatting:
-
 \begin{verbatim}
 ---
 title:  'This is the title: it contains a colon'
@@ -3525,26 +3472,21 @@ author:
 keywords: [nothing, nothingness]
 abstract: |
   This is the abstract.
-
   It consists of two paragraphs.
 ...
 \end{verbatim}
-
 Template variables will be set automatically from the metadata. Thus,
 for example, in writing HTML, the variable \texttt{abstract} will be set
 to the HTML equivalent of the Markdown in the \texttt{abstract} field:
-
 \begin{verbatim}
 <p>This is the abstract.</p>
 <p>It consists of two paragraphs.</p>
 \end{verbatim}
-
 Variables can contain arbitrary YAML structures, but the template must
 match this structure. The \texttt{author} variable in the default
 templates expects a simple list or string, but can be changed to support
 more complicated structures. The following combination, for example,
 would add an affiliation to the author if one is given:
-
 \begin{verbatim}
 ---
 title: The document title
@@ -3555,10 +3497,8 @@ author:
   affiliation: University of Nowhere
 ...
 \end{verbatim}
-
 To use the structured authors in the example above, you would need a
 custom template:
-
 \begin{verbatim}
 $for(author)$
 $if(author.name)$
@@ -3568,13 +3508,11 @@ $author$
 $endif$
 $endfor$
 \end{verbatim}
-
 Raw content to include in the document's header may be specified using
 \texttt{header-includes}; however, it is important to mark up this
 content as raw code for a particular output format, using the
 \protect\hyperlink{extension-raw_attribute}{\texttt{raw\_attribute}
 extension}), or it will be interpreted as markdown. For example:
-
 \begin{verbatim}
 header-includes:
 - |
@@ -3583,129 +3521,95 @@ header-includes:
   \renewcommand{\section}[1]{\clearpage\oldsection{#1}}
   ```
 \end{verbatim}
-
 \hypertarget{backslash-escapes}{%
 \subsection{Backslash escapes}\label{backslash-escapes}}
-
 \hypertarget{extension-all_symbols_escapable}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{all\_symbols\_escapable}}{Extension: all\_symbols\_escapable}}\label{extension-all_symbols_escapable}}
-
 Except inside a code block or inline code, any punctuation or space
 character preceded by a backslash will be treated literally, even if it
 would normally indicate formatting. Thus, for example, if one writes
-
 \begin{verbatim}
 *\*hello\**
 \end{verbatim}
-
 one will get
-
 \begin{verbatim}
 <em>*hello*</em>
 \end{verbatim}
-
 instead of
-
 \begin{verbatim}
 <strong>hello</strong>
 \end{verbatim}
-
 This rule is easier to remember than standard Markdown's rule, which
 allows only the following characters to be backslash-escaped:
-
 \begin{verbatim}
 \`*_{}[]()>#+-.!
 \end{verbatim}
-
 (However, if the \texttt{markdown\_strict} format is used, the standard
 Markdown rule will be used.)
-
 A backslash-escaped space is parsed as a nonbreaking space. It will
 appear in TeX output as \texttt{\textasciitilde{}} and in HTML and XML
 as \texttt{\textbackslash{}\&\#160;} or
 \texttt{\textbackslash{}\&nbsp;}.
-
 A backslash-escaped newline (i.e.~a backslash occurring at the end of a
 line) is parsed as a hard line break. It will appear in TeX output as
 \texttt{\textbackslash{}\textbackslash{}} and in HTML as
 \texttt{\textless{}br\ /\textgreater{}}. This is a nice alternative to
 Markdown's ``invisible'' way of indicating hard line breaks using two
 trailing spaces on a line.
-
 Backslash escapes do not work in verbatim contexts.
-
 \hypertarget{inline-formatting}{%
 \subsection{Inline formatting}\label{inline-formatting}}
-
 \hypertarget{emphasis}{%
 \subsubsection{Emphasis}\label{emphasis}}
-
 To \emph{emphasize} some text, surround it with \texttt{*}s or
 \texttt{\_}, like this:
-
 \begin{verbatim}
 This text is _emphasized with underscores_, and this
 is *emphasized with asterisks*.
 \end{verbatim}
-
 Double \texttt{*} or \texttt{\_} produces \textbf{strong emphasis}:
-
 \begin{verbatim}
 This is **strong emphasis** and __with underscores__.
 \end{verbatim}
-
 A \texttt{*} or \texttt{\_} character surrounded by spaces, or
 backslash-escaped, will not trigger emphasis:
-
 \begin{verbatim}
 This is * not emphasized *, and \*neither is this\*.
 \end{verbatim}
-
 \hypertarget{extension-intraword_underscores}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{intraword\_underscores}}{Extension: intraword\_underscores}}\label{extension-intraword_underscores}}
-
 Because \texttt{\_} is sometimes used inside words and identifiers,
 pandoc does not interpret a \texttt{\_} surrounded by alphanumeric
 characters as an emphasis marker. If you want to emphasize just part of
 a word, use \texttt{*}:
-
 \begin{verbatim}
 feas*ible*, not feas*able*.
 \end{verbatim}
-
 \hypertarget{strikeout}{%
 \subsubsection{Strikeout}\label{strikeout}}
-
 \hypertarget{extension-strikeout}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{strikeout}}{Extension: strikeout}}\label{extension-strikeout}}
-
 To strikeout a section of text with a horizontal line, begin and end it
 with \texttt{\textasciitilde{}\textasciitilde{}}. Thus, for example,
-
 \begin{verbatim}
 This ~~is deleted text.~~
 \end{verbatim}
-
 \hypertarget{superscripts-and-subscripts}{%
 \subsubsection{Superscripts and
 subscripts}\label{superscripts-and-subscripts}}
-
 \hypertarget{extension-superscript-subscript}{%
 \paragraph{\texorpdfstring{Extension: \texttt{superscript},
 \texttt{subscript}}{Extension: superscript, subscript}}\label{extension-superscript-subscript}}
-
 Superscripts may be written by surrounding the superscripted text by
 \texttt{\^{}} characters; subscripts may be written by surrounding the
 subscripted text by \texttt{\textasciitilde{}} characters. Thus, for
 example,
-
 \begin{verbatim}
 H~2~O is a liquid.  2^10^ is 1024.
 \end{verbatim}
-
 If the superscripted or subscripted text contains spaces, these spaces
 must be escaped with backslashes. (This is to prevent accidental
 superscripting and subscripting through the ordinary use of
@@ -3713,77 +3617,54 @@ superscripting and subscripting through the ordinary use of
 letter P with `a cat' in subscripts, use
 \texttt{P\textasciitilde{}a\textbackslash{}\ cat\textasciitilde{}}, not
 \texttt{P\textasciitilde{}a\ cat\textasciitilde{}}.
-
 \hypertarget{verbatim}{%
 \subsubsection{Verbatim}\label{verbatim}}
-
 To make a short span of text verbatim, put it inside backticks:
-
 \begin{verbatim}
 What is the difference between `>>=` and `>>`?
 \end{verbatim}
-
 If the verbatim text includes a backtick, use double backticks:
-
 \begin{verbatim}
 Here is a literal backtick `` ` ``.
 \end{verbatim}
-
 (The spaces after the opening backticks and before the closing backticks
 will be ignored.)
-
 The general rule is that a verbatim span starts with a string of
 consecutive backticks (optionally followed by a space) and ends with a
 string of the same number of backticks (optionally preceded by a space).
-
 Note that backslash-escapes (and other Markdown constructs) do not work
 in verbatim contexts:
-
 \begin{verbatim}
 This is a backslash followed by an asterisk: `\*`.
 \end{verbatim}
-
 \hypertarget{extension-inline_code_attributes}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{inline\_code\_attributes}}{Extension: inline\_code\_attributes}}\label{extension-inline_code_attributes}}
-
 Attributes can be attached to verbatim text, just as with
 \protect\hyperlink{fenced-code-blocks}{fenced code blocks}:
-
 \begin{verbatim}
 `<$>`{.haskell}
 \end{verbatim}
-
 \hypertarget{small-caps}{%
 \subsubsection{Small caps}\label{small-caps}}
-
 To write small caps, use the \texttt{smallcaps} class:
-
 \begin{verbatim}
 [Small caps]{.smallcaps}
 \end{verbatim}
-
 Or, without the \texttt{bracketed\_spans} extension:
-
 \begin{verbatim}
 <span class="smallcaps">Small caps</span>
 \end{verbatim}
-
 For compatibility with other Markdown flavors, CSS is also supported:
-
 \begin{verbatim}
 <span style="font-variant:small-caps;">Small caps</span>
 \end{verbatim}
-
 This will work in all output formats that support small caps.
-
 \hypertarget{math}{%
 \subsection{Math}\label{math}}
-
 \hypertarget{extension-tex_math_dollars}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{tex\_math\_dollars}}{Extension: tex\_math\_dollars}}\label{extension-tex_math_dollars}}
-
 Anything between two \texttt{\$} characters will be treated as TeX math.
 The opening \texttt{\$} must have a non-space character immediately to
 its right, while the closing \texttt{\$} must have a non-space character
@@ -3792,10 +3673,8 @@ digit. Thus, \texttt{\$20,000\ and\ \$30,000} won't parse as math. If
 for some reason you need to enclose text in literal \texttt{\$}
 characters, backslash-escape them and they won't be treated as math
 delimiters.
-
 TeX math will be printed in all output formats. How it is rendered
 depends on the output format:
-
 \begin{description}
 \tightlist
 \item[LaTeX]
@@ -3840,45 +3719,36 @@ The way math is rendered in HTML will depend on the command-line options
 selected. Therefore see \protect\hyperlink{math-rendering-in-html}{Math
 rendering in HTML} above.
 \end{description}
-
 \hypertarget{raw-html}{%
 \subsection{Raw HTML}\label{raw-html}}
-
 \hypertarget{extension-raw_html}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{raw\_html}}{Extension: raw\_html}}\label{extension-raw_html}}
-
 Markdown allows you to insert raw HTML (or DocBook) anywhere in a
 document (except verbatim contexts, where \texttt{\textless{}},
 \texttt{\textgreater{}}, and \texttt{\&} are interpreted literally).
 (Technically this is not an extension, since standard Markdown allows
 it, but it has been made an extension so that it can be disabled if
 desired.)
-
 The raw HTML is passed through unchanged in HTML, S5, Slidy, Slideous,
 DZSlides, EPUB, Markdown, CommonMark, Emacs Org mode, and Textile
 output, and suppressed in other formats.
-
 In the CommonMark format, if \texttt{raw\_html} is enabled,
 superscripts, subscripts, strikeouts and small capitals will be
 represented as HTML. Otherwise, plain-text fallbacks will be used. Note
 that even if \texttt{raw\_html} is disabled, tables will be rendered
 with HTML syntax if they cannot use pipe syntax.
-
 \hypertarget{extension-markdown_in_html_blocks}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{markdown\_in\_html\_blocks}}{Extension: markdown\_in\_html\_blocks}}\label{extension-markdown_in_html_blocks}}
-
 Standard Markdown allows you to include HTML ``blocks'': blocks of HTML
 between balanced tags that are separated from the surrounding text with
 blank lines, and start and end at the left margin. Within these blocks,
 everything is interpreted as HTML, not Markdown; so (for example),
 \texttt{*} does not signify emphasis.
-
 Pandoc behaves this way when the \texttt{markdown\_strict} format is
 used; but by default, pandoc interprets material between HTML block tags
 as Markdown. Thus, for example, pandoc will turn
-
 \begin{verbatim}
 <table>
 <tr>
@@ -3887,9 +3757,7 @@ as Markdown. Thus, for example, pandoc will turn
 </tr>
 </table>
 \end{verbatim}
-
 into
-
 \begin{verbatim}
 <table>
 <tr>
@@ -3898,53 +3766,41 @@ into
 </tr>
 </table>
 \end{verbatim}
-
 whereas \texttt{Markdown.pl} will preserve it as is.
-
 There is one exception to this rule: text between
 \texttt{\textless{}script\textgreater{}} and
 \texttt{\textless{}style\textgreater{}} tags is not interpreted as
 Markdown.
-
 This departure from standard Markdown should make it easier to mix
 Markdown with HTML block elements. For example, one can surround a block
 of Markdown text with \texttt{\textless{}div\textgreater{}} tags without
 preventing it from being interpreted as Markdown.
-
 \hypertarget{extension-native_divs}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{native\_divs}}{Extension: native\_divs}}\label{extension-native_divs}}
-
 Use native pandoc \texttt{Div} blocks for content inside
 \texttt{\textless{}div\textgreater{}} tags. For the most part this
 should give the same output as \texttt{markdown\_in\_html\_blocks}, but
 it makes it easier to write pandoc filters to manipulate groups of
 blocks.
-
 \hypertarget{extension-native_spans}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{native\_spans}}{Extension: native\_spans}}\label{extension-native_spans}}
-
 Use native pandoc \texttt{Span} blocks for content inside
 \texttt{\textless{}span\textgreater{}} tags. For the most part this
 should give the same output as \texttt{raw\_html}, but it makes it
 easier to write pandoc filters to manipulate groups of inlines.
-
 \hypertarget{extension-raw_tex}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{raw\_tex}}{Extension: raw\_tex}}\label{extension-raw_tex}}
-
 In addition to raw HTML, pandoc allows raw LaTeX, TeX, and ConTeXt to be
 included in a document. Inline TeX commands will be preserved and passed
 unchanged to the LaTeX and ConTeXt writers. Thus, for example, you can
 use LaTeX to include BibTeX citations:
-
 \begin{verbatim}
 This result was proved in \cite{jones.1967}.
 \end{verbatim}
-
 Note that in LaTeX environments, like
-
 \begin{verbatim}
 \begin{tabular}{|l|l|}\hline
 Age & Frequency \\ \hline
@@ -3953,40 +3809,30 @@ Age & Frequency \\ \hline
 36--45  & 22 \\ \hline
 \end{tabular}
 \end{verbatim}
-
 the material between the begin and end tags will be interpreted as raw
 LaTeX, not as Markdown.
-
 Inline LaTeX is ignored in output formats other than Markdown, LaTeX,
 Emacs Org mode, and ConTeXt.
-
 \hypertarget{generic-raw-attribute}{%
 \subsubsection{Generic raw attribute}\label{generic-raw-attribute}}
-
 \hypertarget{extension-raw_attribute}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{raw\_attribute}}{Extension: raw\_attribute}}\label{extension-raw_attribute}}
-
 Inline spans and fenced code blocks with a special kind of attribute
 will be parsed as raw content with the designated format. For example,
 the following produces a raw roff \texttt{ms} block:
-
 \begin{verbatim}
 ```{=ms}
 .MYMACRO
 blah blah
 ```
 \end{verbatim}
-
 And the following produces a raw \texttt{html} inline element:
-
 \begin{verbatim}
 This is `<a>html</a>`{=html}
 \end{verbatim}
-
 This can be useful to insert raw xml into \texttt{docx} documents,
 e.g.~a pagebreak:
-
 \begin{verbatim}
 ```{=openxml}
 <w:p>
@@ -3996,7 +3842,6 @@ e.g.~a pagebreak:
 </w:p>
 ```
 \end{verbatim}
-
 The format name should match the target format name (see
 \texttt{-t/-\/-to}, above, for a list, or use
 \texttt{pandoc\ -\/-list-output-formats}). Use \texttt{openxml} for
@@ -4005,90 +3850,66 @@ The format name should match the target format name (see
 \texttt{epub2} output, and \texttt{latex}, \texttt{beamer}, \texttt{ms},
 or \texttt{html5} for \texttt{pdf} output (depending on what you use for
 \texttt{-\/-pdf-engine}).
-
 This extension presupposes that the relevant kind of inline code or
 fenced code block is enabled. Thus, for example, to use a raw attribute
 with a backtick code block, \texttt{backtick\_code\_blocks} must be
 enabled.
-
 The raw attribute cannot be combined with regular attributes.
-
 \hypertarget{latex-macros}{%
 \subsection{LaTeX macros}\label{latex-macros}}
-
 \hypertarget{extension-latex_macros}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{latex\_macros}}{Extension: latex\_macros}}\label{extension-latex_macros}}
-
 For output formats other than LaTeX, pandoc will parse LaTeX macro
 definitions and apply the resulting macros to all LaTeX math and raw
 LaTeX. So, for example, the following will work in all output formats,
 not just LaTeX:
-
 \begin{verbatim}
 \newcommand{\tuple}[1]{\langle #1 \rangle}
-
 $\tuple{a, b, c}$
 \end{verbatim}
-
 Note that LaTeX macros will not be applied if they occur inside inside a
 raw span or block marked with the
 \protect\hyperlink{extension-raw_attribute}{\texttt{raw\_attribute}
 extension}.
-
 When \texttt{latex\_macros} is disabled, the raw LaTeX and math will not
 have macros applied. This is usually a better approach when you are
 targeting LaTeX or PDF.
-
 Whether or not \texttt{latex\_macros} is enabled, the macro definitions
 will still be passed through as raw LaTeX.
-
 \hypertarget{links}{%
 \subsection{Links}\label{links}}
-
 Markdown allows links to be specified in several ways.
-
 \hypertarget{automatic-links}{%
 \subsubsection{Automatic links}\label{automatic-links}}
-
 If you enclose a URL or email address in pointy brackets, it will become
 a link:
-
 \begin{verbatim}
 <http://google.com>
 <sam@green.eggs.ham>
 \end{verbatim}
-
 \hypertarget{inline-links}{%
 \subsubsection{Inline links}\label{inline-links}}
-
 An inline link consists of the link text in square brackets, followed by
 the URL in parentheses. (Optionally, the URL can be followed by a link
 title, in quotes.)
-
 \begin{verbatim}
 This is an [inline link](/url), and here's [one with
 a title](http://fsf.org "click here for a good time!").
 \end{verbatim}
-
 There can be no space between the bracketed part and the parenthesized
 part. The link text can contain formatting (such as emphasis), but the
 title cannot.
-
 Email addresses in inline links are not autodetected, so they have to be
 prefixed with \texttt{mailto}:
-
 \begin{verbatim}
 [Write me!](mailto:sam@green.eggs.ham)
 \end{verbatim}
-
 \hypertarget{reference-links}{%
 \subsubsection{Reference links}\label{reference-links}}
-
 An \emph{explicit} reference link has two parts, the link itself and the
 link definition, which may occur elsewhere in the document (either
 before or after the link).
-
 The link consists of link text in square brackets, followed by a label
 in square brackets. (There cannot be space between the two unless the
 \texttt{spaced\_reference\_links} extension is enabled.) The link
@@ -4097,168 +3918,122 @@ space, followed by the URL, and optionally (after a space) a link title
 either in quotes or in parentheses. The label must not be parseable as a
 citation (assuming the \texttt{citations} extension is enabled):
 citations take precedence over link labels.
-
 Here are some examples:
-
 \begin{verbatim}
 [my label 1]: /foo/bar.html  "My title, optional"
 [my label 2]: /foo
 [my label 3]: http://fsf.org (The free software foundation)
 [my label 4]: /bar#special  'A title in single quotes'
 \end{verbatim}
-
 The URL may optionally be surrounded by angle brackets:
-
 \begin{verbatim}
 [my label 5]: <http://foo.bar.baz>
 \end{verbatim}
-
 The title may go on the next line:
-
 \begin{verbatim}
 [my label 3]: http://fsf.org
   "The free software foundation"
 \end{verbatim}
-
 Note that link labels are not case sensitive. So, this will work:
-
 \begin{verbatim}
 Here is [my link][FOO]
-
 [Foo]: /bar/baz
 \end{verbatim}
-
 In an \emph{implicit} reference link, the second pair of brackets is
 empty:
-
 \begin{verbatim}
 See [my website][].
-
 [my website]: http://foo.bar.baz
 \end{verbatim}
-
 Note: In \texttt{Markdown.pl} and most other Markdown implementations,
 reference link definitions cannot occur in nested constructions such as
 list items or block quotes. Pandoc lifts this arbitrary seeming
 restriction. So the following is fine in pandoc, though not in most
 other implementations:
-
 \begin{verbatim}
 > My block [quote].
 >
 > [quote]: /foo
 \end{verbatim}
-
 \hypertarget{extension-shortcut_reference_links}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{shortcut\_reference\_links}}{Extension: shortcut\_reference\_links}}\label{extension-shortcut_reference_links}}
-
 In a \emph{shortcut} reference link, the second pair of brackets may be
 omitted entirely:
-
 \begin{verbatim}
 See [my website].
-
 [my website]: http://foo.bar.baz
 \end{verbatim}
-
 \hypertarget{internal-links}{%
 \subsubsection{Internal links}\label{internal-links}}
-
 To link to another section of the same document, use the automatically
 generated identifier (see \protect\hyperlink{header-identifiers}{Header
 identifiers}). For example:
-
 \begin{verbatim}
 See the [Introduction](#introduction).
 \end{verbatim}
-
 or
-
 \begin{verbatim}
 See the [Introduction].
-
 [Introduction]: #introduction
 \end{verbatim}
-
 Internal links are currently supported for HTML formats (including HTML
 slide shows and EPUB), LaTeX, and ConTeXt.
-
 \hypertarget{images}{%
 \subsection{Images}\label{images}}
-
 A link immediately preceded by a \texttt{!} will be treated as an image.
 The link text will be used as the image's alt text:
-
 \begin{verbatim}
 ![la lune](lalune.jpg "Voyage to the moon")
-
 ![movie reel]
-
 [movie reel]: movie.gif
 \end{verbatim}
-
 \hypertarget{extension-implicit_figures}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{implicit\_figures}}{Extension: implicit\_figures}}\label{extension-implicit_figures}}
-
 An image with nonempty alt text, occurring by itself in a paragraph,
 will be rendered as a figure with a caption. The image's alt text will
 be used as the caption.
-
 \begin{verbatim}
 ![This is the caption](/url/of/image.png)
 \end{verbatim}
-
 How this is rendered depends on the output format. Some output formats
 (e.g.~RTF) do not yet support figures. In those formats, you'll just get
 an image in a paragraph by itself, with no caption.
-
 If you just want a regular inline image, just make sure it is not the
 only thing in the paragraph. One way to do this is to insert a
 nonbreaking space after the image:
-
 \begin{verbatim}
 ![This image won't be a figure](/url/of/image.png)\
 \end{verbatim}
-
 Note that in reveal.js slide shows, an image in a paragraph by itself
 that has the \texttt{stretch} class will fill the screen, and the
 caption and figure tags will be omitted.
-
 \hypertarget{extension-link_attributes}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{link\_attributes}}{Extension: link\_attributes}}\label{extension-link_attributes}}
-
 Attributes can be set on links and images:
-
 \begin{verbatim}
 An inline ![image](foo.jpg){#id .class width=30 height=20px}
 and a reference ![image][ref] with attributes.
-
 [ref]: foo.jpg "optional title" {#id .class key=val key2="val 2"}
 \end{verbatim}
-
 (This syntax is compatible with
 \href{https://michelf.ca/projects/php-markdown/extra/}{PHP Markdown
 Extra} when only \texttt{\#id} and \texttt{.class} are used.)
-
 For HTML and EPUB, all attributes except \texttt{width} and
 \texttt{height} (but including \texttt{srcset} and \texttt{sizes}) are
 passed through as is. The other writers ignore attributes that are not
 supported by their output format.
-
 The \texttt{width} and \texttt{height} attributes on images are treated
 specially. When used without a unit, the unit is assumed to be pixels.
 However, any of the following unit identifiers can be used: \texttt{px},
 \texttt{cm}, \texttt{mm}, \texttt{in}, \texttt{inch} and \texttt{\%}.
 There must not be any spaces between the number and the unit. For
 example:
-
 \begin{verbatim}
 ![](file.jpg){ width=50% }
 \end{verbatim}
-
 \begin{itemize}
 \tightlist
 \item
@@ -4269,7 +4044,6 @@ example:
 \item
   The \texttt{\%} unit is generally relative to some available space.
   For example the above example will render to the following.
-
   \begin{itemize}
   \tightlist
   \item
@@ -4294,20 +4068,16 @@ example:
   the fallback is to look at the image resolution and the dpi metadata
   embedded in the image file.
 \end{itemize}
-
 \hypertarget{divs-and-spans}{%
 \subsection{Divs and Spans}\label{divs-and-spans}}
-
 Using the \texttt{native\_divs} and \texttt{native\_spans} extensions
 (see \protect\hyperlink{extension-native_divs}{above}), HTML syntax can
 be used as part of markdown to create native \texttt{Div} and
 \texttt{Span} elements in the pandoc AST (as opposed to raw HTML).
 However, there is also nicer syntax available:
-
 \hypertarget{extension-fenced_divs}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{fenced\_divs}}{Extension: fenced\_divs}}\label{extension-fenced_divs}}
-
 Allow special fenced syntax for native \texttt{Div} blocks. A Div starts
 with a fence containing at least three consecutive colons plus some
 attributes. The attributes may optionally be followed by another string
@@ -4319,117 +4089,86 @@ use either attributes in curly braces or a single unbraced word, which
 will be treated as a class name. The Div ends with another line
 containing a string of at least three consecutive colons. The fenced Div
 should be separated by blank lines from preceding and following blocks.
-
 Example:
-
 \begin{verbatim}
 ::::: {#special .sidebar}
 Here is a paragraph.
-
 And another.
 :::::
 \end{verbatim}
-
 Fenced divs can be nested. Opening fences are distinguished because they
 \emph{must} have attributes:
-
 \begin{verbatim}
 ::: Warning ::::::
 This is a warning.
-
 ::: Danger
 This is a warning within a warning.
 :::
 ::::::::::::::::::
 \end{verbatim}
-
 Fences without attributes are always closing fences. Unlike with fenced
 code blocks, the number of colons in the closing fence need not match
 the number in the opening fence. However, it can be helpful for visual
 clarity to use fences of different lengths to distinguish nested divs
 from their parents.
-
 \hypertarget{extension-bracketed_spans}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{bracketed\_spans}}{Extension: bracketed\_spans}}\label{extension-bracketed_spans}}
-
 A bracketed sequence of inlines, as one would use to begin a link, will
 be treated as a \texttt{Span} with attributes if it is followed
 immediately by attributes:
-
 \begin{verbatim}
 [This is *some text*]{.class key="val"}
 \end{verbatim}
-
 \hypertarget{footnotes}{%
 \subsection{Footnotes}\label{footnotes}}
-
 \hypertarget{extension-footnotes}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{footnotes}}{Extension: footnotes}}\label{extension-footnotes}}
-
 Pandoc's Markdown allows footnotes, using the following syntax:
-
 \begin{verbatim}
 Here is a footnote reference,[^1] and another.[^longnote]
-
 [^1]: Here is the footnote.
-
 [^longnote]: Here's one with multiple blocks.
-
     Subsequent paragraphs are indented to show that they
 belong to the previous footnote.
-
         { some.code }
-
     The whole paragraph can be indented, or just the first
     line.  In this way, multi-paragraph footnotes work like
     multi-paragraph list items.
-
 This paragraph won't be part of the note, because it
 isn't indented.
 \end{verbatim}
-
 The identifiers in footnote references may not contain spaces, tabs, or
 newlines. These identifiers are used only to correlate the footnote
 reference with the note itself; in the output, footnotes will be
 numbered sequentially.
-
 The footnotes themselves need not be placed at the end of the document.
 They may appear anywhere except inside other block elements (lists,
 block quotes, tables, etc.). Each footnote should be separated from
 surrounding content (including other footnotes) by blank lines.
-
 \hypertarget{extension-inline_notes}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{inline\_notes}}{Extension: inline\_notes}}\label{extension-inline_notes}}
-
 Inline footnotes are also allowed (though, unlike regular notes, they
 cannot contain multiple paragraphs). The syntax is as follows:
-
 \begin{verbatim}
 Here is an inline note.^[Inlines notes are easier to write, since
 you don't have to pick an identifier and move down to type the
 note.]
 \end{verbatim}
-
 Inline and regular footnotes may be mixed freely.
-
 \hypertarget{citations}{%
 \subsection{Citations}\label{citations}}
-
 \hypertarget{extension-citations}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{citations}}{Extension: citations}}\label{extension-citations}}
-
 Using an external filter, \texttt{pandoc-citeproc}, pandoc can
 automatically generate citations and a bibliography in a number of
 styles. Basic usage is
-
 \begin{verbatim}
 pandoc --filter pandoc-citeproc myinput.txt
 \end{verbatim}
-
 In order to use this feature, you will need to specify a bibliography
 file using the \texttt{bibliography} metadata field in a YAML metadata
 section, or \texttt{-\/-bibliography} command line argument. You can
@@ -4437,7 +4176,6 @@ supply multiple \texttt{-\/-bibliography} arguments or set
 \texttt{bibliography} metadata field to YAML array, if you want to use
 multiple bibliography files. The bibliography may have any of these
 formats:
-
 \begin{longtable}[]{@{}ll@{}}
 \toprule
 Format & File extension\tabularnewline
@@ -4456,20 +4194,16 @@ MODS & .mods\tabularnewline
 RIS & .ris\tabularnewline
 \bottomrule
 \end{longtable}
-
 Note that \texttt{.bib} can be used with both BibTeX and BibLaTeX files;
 use \texttt{.bibtex} to force BibTeX.
-
 Note that \texttt{pandoc-citeproc\ -\/-bib2json} and
 \texttt{pandoc-citeproc\ -\/-bib2yaml} can produce \texttt{.json} and
 \texttt{.yaml} files from any of the supported formats.
-
 In-field markup: In BibTeX and BibLaTeX databases, pandoc-citeproc
 parses a subset of LaTeX markup; in CSL YAML databases, pandoc Markdown;
 and in CSL JSON databases, an
 \href{http://docs.citationstyles.org/en/1.0/release-notes.html\#rich-text-markup-within-fields}{HTML-like
 markup}:
-
 \begin{description}
 \tightlist
 \item[\texttt{\textless{}i\textgreater{}...\textless{}/i\textgreater{}}]
@@ -4486,16 +4220,13 @@ superscript
 \item[\texttt{\textless{}span\ class="nocase"\textgreater{}...\textless{}/span\textgreater{}}]
 prevent a phrase from being capitalized as title case
 \end{description}
-
 \texttt{pandoc-citeproc\ -j} and \texttt{-y} interconvert the CSL JSON
 and CSL YAML formats as far as possible.
-
 As an alternative to specifying a bibliography file using
 \texttt{-\/-bibliography} or the YAML metadata field
 \texttt{bibliography}, you can include the citation data directly in the
 \texttt{references} field of the document's YAML metadata. The field
 should contain an array of YAML-encoded references, for example:
-
 \begin{verbatim}
 ---
 references:
@@ -4523,10 +4254,8 @@ references:
   language: en-GB
 ...
 \end{verbatim}
-
 (\texttt{pandoc-citeproc\ -\/-bib2yaml} can produce these from a
 bibliography file in one of the supported formats.)
-
 Citations and references can be formatted using any style supported by
 the \href{http://citationstyles.org}{Citation Style Language}, listed in
 the \href{https://www.zotero.org/styles}{Zotero Style Repository}. These
@@ -4535,10 +4264,8 @@ files are specified using the \texttt{-\/-csl} option or the
 use the \href{http://chicagomanualofstyle.org}{Chicago Manual of Style}
 author-date format. The CSL project provides further information on
 \href{https://citationstyles.org/authors/}{finding and editing styles}.
-
 To make your citations hyperlinks to the corresponding bibliography
 entries, add \texttt{link-citations:\ true} to your YAML metadata.
-
 Citations go inside square brackets and are separated by semicolons.
 Each citation must have a key, composed of `@' + the citation identifier
 from the database, and may optionally have a prefix, a locator, and a
@@ -4547,15 +4274,11 @@ suffix. The citation key must begin with a letter, digit, or
 punctuation characters
 (\texttt{:.\#\$\%\&-+?\textless{}\textgreater{}\textasciitilde{}/}).
 Here are some examples:
-
 \begin{verbatim}
 Blah blah [see @doe99, pp. 33-35; also @smith04, chap. 1].
-
 Blah blah [@doe99, pp. 33-35, 38-39 and *passim*].
-
 Blah blah [@smith04; @doe99].
 \end{verbatim}
-
 \texttt{pandoc-citeproc} detects locator terms in the
 \href{https://github.com/citation-style-language/locales}{CSL locale
 files}. Either abbreviated or unabbreviated forms are accepted. In the
@@ -4574,64 +4297,48 @@ or plural forms, as \texttt{book}, \texttt{bk.}/\texttt{bks.};
 \texttt{s.v.}/\texttt{s.vv.}; \texttt{verse}, \texttt{v.}/\texttt{vv.};
 \texttt{volume}, \texttt{vol.}/\texttt{vols.}; \texttt{¶}/\texttt{¶¶};
 \texttt{§}/\texttt{§§}. If no locator term is used, ``page'' is assumed.
-
 A minus sign (\texttt{-}) before the \texttt{@} will suppress mention of
 the author in the citation. This can be useful when the author is
 already mentioned in the text:
-
 \begin{verbatim}
 Smith says blah [-@smith04].
 \end{verbatim}
-
 You can also write an in-text citation, as follows:
-
 \begin{verbatim}
 @smith04 says blah.
-
 @smith04 [p. 33] says blah.
 \end{verbatim}
-
 If the style calls for a list of works cited, it will be placed at the
 end of the document. Normally, you will want to end your document with
 an appropriate header:
-
 \begin{verbatim}
 last paragraph...
-
 # References
 \end{verbatim}
-
 The bibliography will be inserted after this header. Note that the
 \texttt{unnumbered} class will be added to this header, so that the
 section will not be numbered.
-
 If you want to include items in the bibliography without actually citing
 them in the body text, you can define a dummy \texttt{nocite} metadata
 field and put the citations there:
-
 \begin{verbatim}
 ---
 nocite: |
   @item1, @item2
 ...
-
 @item3
 \end{verbatim}
-
 In this example, the document will contain a citation for \texttt{item3}
 only, but the bibliography will contain entries for \texttt{item1},
 \texttt{item2}, and \texttt{item3}.
-
 It is possible to create a bibliography with all the citations, whether
 or not they appear in the document, by using a wildcard:
-
 \begin{verbatim}
 ---
 nocite: |
   @*
 ...
 \end{verbatim}
-
 For LaTeX output, you can also use
 \href{https://ctan.org/pkg/natbib}{\texttt{natbib}} or
 \href{https://ctan.org/pkg/biblatex}{\texttt{biblatex}} to render the
@@ -4639,133 +4346,102 @@ bibliography. In order to do so, specify bibliography files as outlined
 above, and add \texttt{-\/-natbib} or \texttt{-\/-biblatex} argument to
 \texttt{pandoc} invocation. Bear in mind that bibliography files have to
 be in respective format (either BibTeX or BibLaTeX).
-
 For more information, see the
 \href{https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md}{pandoc-citeproc
 man page}.
-
 \hypertarget{non-pandoc-extensions}{%
 \subsection{Non-pandoc extensions}\label{non-pandoc-extensions}}
-
 The following Markdown syntax extensions are not enabled by default in
 pandoc, but may be enabled by adding \texttt{+EXTENSION} to the format
 name, where \texttt{EXTENSION} is the name of the extension. Thus, for
 example, \texttt{markdown+hard\_line\_breaks} is Markdown with hard line
 breaks.
-
 \hypertarget{extension-old_dashes}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{old\_dashes}}{Extension: old\_dashes}}\label{extension-old_dashes}}
-
 Selects the pandoc \textless{}= 1.8.2.1 behavior for parsing smart
 dashes: \texttt{-} before a numeral is an en-dash, and \texttt{-\/-} is
 an em-dash. This option only has an effect if \texttt{smart} is enabled.
 It is selected automatically for \texttt{textile} input.
-
 \hypertarget{extension-angle_brackets_escapable}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{angle\_brackets\_escapable}}{Extension: angle\_brackets\_escapable}}\label{extension-angle_brackets_escapable}}
-
 Allow \texttt{\textless{}} and \texttt{\textgreater{}} to be
 backslash-escaped, as they can be in GitHub flavored Markdown but not
 original Markdown. This is implied by pandoc's default
 \texttt{all\_symbols\_escapable}.
-
 \hypertarget{extension-lists_without_preceding_blankline}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{lists\_without\_preceding\_blankline}}{Extension: lists\_without\_preceding\_blankline}}\label{extension-lists_without_preceding_blankline}}
-
 Allow a list to occur right after a paragraph, with no intervening blank
 space.
-
 \hypertarget{extension-four_space_rule}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{four\_space\_rule}}{Extension: four\_space\_rule}}\label{extension-four_space_rule}}
-
 Selects the pandoc \textless{}= 2.0 behavior for parsing lists, so that
 four spaces indent are needed for list item continuation paragraphs.
-
 \hypertarget{extension-spaced_reference_links}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{spaced\_reference\_links}}{Extension: spaced\_reference\_links}}\label{extension-spaced_reference_links}}
-
 Allow whitespace between the two components of a reference link, for
 example,
-
 \begin{verbatim}
 [foo] [bar].
 \end{verbatim}
-
 \hypertarget{extension-hard_line_breaks}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{hard\_line\_breaks}}{Extension: hard\_line\_breaks}}\label{extension-hard_line_breaks}}
-
 Causes all newlines within a paragraph to be interpreted as hard line
 breaks instead of spaces.
-
 \hypertarget{extension-ignore_line_breaks}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{ignore\_line\_breaks}}{Extension: ignore\_line\_breaks}}\label{extension-ignore_line_breaks}}
-
 Causes newlines within a paragraph to be ignored, rather than being
 treated as spaces or as hard line breaks. This option is intended for
 use with East Asian languages where spaces are not used between words,
 but text is divided into lines for readability.
-
 \hypertarget{extension-east_asian_line_breaks}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{east\_asian\_line\_breaks}}{Extension: east\_asian\_line\_breaks}}\label{extension-east_asian_line_breaks}}
-
 Causes newlines within a paragraph to be ignored, rather than being
 treated as spaces or as hard line breaks, when they occur between two
 East Asian wide characters. This is a better choice than
 \texttt{ignore\_line\_breaks} for texts that include a mix of East Asian
 wide characters and other characters.
-
 \hypertarget{extension-emoji}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{emoji}}{Extension: emoji}}\label{extension-emoji}}
-
 Parses textual emojis like \texttt{:smile:} as Unicode emoticons.
-
 \hypertarget{extension-tex_math_single_backslash}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{tex\_math\_single\_backslash}}{Extension: tex\_math\_single\_backslash}}\label{extension-tex_math_single_backslash}}
-
 Causes anything between \texttt{\textbackslash{}(} and
 \texttt{\textbackslash{})} to be interpreted as inline TeX math, and
 anything between \texttt{\textbackslash{}{[}} and
 \texttt{\textbackslash{}{]}} to be interpreted as display TeX math.
 Note: a drawback of this extension is that it precludes escaping
 \texttt{(} and \texttt{{[}}.
-
 \hypertarget{extension-tex_math_double_backslash}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{tex\_math\_double\_backslash}}{Extension: tex\_math\_double\_backslash}}\label{extension-tex_math_double_backslash}}
-
 Causes anything between \texttt{\textbackslash{}\textbackslash{}(} and
 \texttt{\textbackslash{}\textbackslash{})} to be interpreted as inline
 TeX math, and anything between
 \texttt{\textbackslash{}\textbackslash{}{[}} and
 \texttt{\textbackslash{}\textbackslash{}{]}} to be interpreted as
 display TeX math.
-
 \hypertarget{extension-markdown_attribute}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{markdown\_attribute}}{Extension: markdown\_attribute}}\label{extension-markdown_attribute}}
-
 By default, pandoc interprets material inside block-level tags as
 Markdown. This extension changes the behavior so that Markdown is only
 parsed inside block-level tags if the tags have the attribute
 \texttt{markdown=1}.
-
 \hypertarget{extension-mmd_title_block}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{mmd\_title\_block}}{Extension: mmd\_title\_block}}\label{extension-mmd_title_block}}
-
 Enables a \href{http://fletcherpenney.net/multimarkdown/}{MultiMarkdown}
 style title block at the top of the document, for example:
-
 \begin{verbatim}
 Title:   My title
 Author:  John Doe
@@ -4773,64 +4449,48 @@ Date:    September 1, 2008
 Comment: This is a sample mmd title block, with
          a field spanning multiple lines.
 \end{verbatim}
-
 See the MultiMarkdown documentation for details. If
 \texttt{pandoc\_title\_block} or \texttt{yaml\_metadata\_block} is
 enabled, it will take precedence over \texttt{mmd\_title\_block}.
-
 \hypertarget{extension-abbreviations}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{abbreviations}}{Extension: abbreviations}}\label{extension-abbreviations}}
-
 Parses PHP Markdown Extra abbreviation keys, like
-
 \begin{verbatim}
 *[HTML]: Hypertext Markup Language
 \end{verbatim}
-
 Note that the pandoc document model does not support abbreviations, so
 if this extension is enabled, abbreviation keys are simply skipped (as
 opposed to being parsed as paragraphs).
-
 \hypertarget{extension-autolink_bare_uris}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{autolink\_bare\_uris}}{Extension: autolink\_bare\_uris}}\label{extension-autolink_bare_uris}}
-
 Makes all absolute URIs into links, even when not surrounded by pointy
 braces \texttt{\textless{}...\textgreater{}}.
-
 \hypertarget{extension-mmd_link_attributes}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{mmd\_link\_attributes}}{Extension: mmd\_link\_attributes}}\label{extension-mmd_link_attributes}}
-
 Parses multimarkdown style key-value attributes on link and image
 references. This extension should not be confused with the
 \protect\hyperlink{extension-link_attributes}{\texttt{link\_attributes}}
 extension.
-
 \begin{verbatim}
 This is a reference ![image][ref] with multimarkdown attributes.
-
 [ref]: http://path.to/image "Image title" width=20px height=30px
        id=myId class="myClass1 myClass2"
 \end{verbatim}
-
 \hypertarget{extension-mmd_header_identifiers}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{mmd\_header\_identifiers}}{Extension: mmd\_header\_identifiers}}\label{extension-mmd_header_identifiers}}
-
 Parses multimarkdown style header identifiers (in square brackets, after
 the header but before any trailing \texttt{\#}s in an ATX header).
-
 \hypertarget{extension-compact_definition_lists}{%
 \paragraph{\texorpdfstring{Extension:
 \texttt{compact\_definition\_lists}}{Extension: compact\_definition\_lists}}\label{extension-compact_definition_lists}}
-
 Activates the definition list syntax of pandoc 1.12.x and earlier. This
 syntax differs from the one described above under
 \protect\hyperlink{definition-lists}{Definition lists} in several
 respects:
-
 \begin{itemize}
 \tightlist
 \item
@@ -4845,26 +4505,21 @@ respects:
   be indented four spaces.\footnote{To see why laziness is incompatible
     with relaxing the requirement of a blank line between items,
     consider the following example:
-
 \begin{Verbatim}
 bar
 :    definition
 foo
 :    definition
 \end{Verbatim}
-
     Is this a single list item with two definitions of ``bar,'' the
     first of which is lazily wrapped, or two list items? To remove the
     ambiguity we must either disallow lazy wrapping or require a blank
     line between list items.}
 \end{itemize}
-
 \hypertarget{markdown-variants}{%
 \subsection{Markdown variants}\label{markdown-variants}}
-
 In addition to pandoc's extended Markdown, the following Markdown
 variants are supported:
-
 \begin{description}
 \tightlist
 \item[\texttt{markdown\_phpextra} (PHP Markdown Extra)]
@@ -4898,17 +4553,14 @@ variants are supported:
 \texttt{raw\_html}, \texttt{shortcut\_reference\_links},
 \texttt{spaced\_reference\_links}.
 \end{description}
-
 We also support \texttt{commonmark} and \texttt{gfm} (GitHub-Flavored
 Markdown, which is implemented as a set of extensions on
 \texttt{commonmark}).
-
 Note, however, that \texttt{commonmark} and \texttt{gfm} have limited
 support for extensions. Only those listed below (and \texttt{smart} and
 \texttt{raw\_tex}) will work. The extensions can, however, all be
 individually disabled. Also, \texttt{raw\_tex} only affects \texttt{gfm}
 output, not input.
-
 \begin{description}
 \tightlist
 \item[\texttt{gfm} (GitHub-Flavored Markdown)]
@@ -4920,11 +4572,9 @@ output, not input.
 \texttt{shortcut\_reference\_links},
 \texttt{angle\_brackets\_escapable}.
 \end{description}
-
 \hypertarget{producing-slide-shows-with-pandoc}{%
 \section{Producing slide shows with
 pandoc}\label{producing-slide-shows-with-pandoc}}
-
 You can use pandoc to produce an HTML + JavaScript slide presentation
 that can be viewed via a web browser. There are five ways to do this,
 using \href{http://meyerweb.com/eric/tools/s5/}{S5},
@@ -4937,52 +4587,34 @@ PDF slide show using LaTeX
 Microsoft
 \href{https://en.wikipedia.org/wiki/Microsoft_PowerPoint}{PowerPoint}
 format.
-
 Here's the Markdown source for a simple slide show, \texttt{habits.txt}:
-
 \begin{verbatim}
 % Habits
 % John Doe
 % March 22, 2005
-
 # In the morning
-
 ## Getting up
-
 - Turn off alarm
 - Get out of bed
-
 ## Breakfast
-
 - Eat eggs
 - Drink coffee
-
 # In the evening
-
 ## Dinner
-
 - Eat spaghetti
 - Drink wine
-
 ------------------
-
 ![picture of spaghetti](images/spaghetti.jpg)
-
 ## Going to sleep
-
 - Get in bed
 - Count sheep
 \end{verbatim}
-
 To produce an HTML/JavaScript slide show, simply type
-
 \begin{verbatim}
 pandoc -t FORMAT -s habits.txt -o habits.html
 \end{verbatim}
-
 where \texttt{FORMAT} is either \texttt{s5}, \texttt{slidy},
 \texttt{slideous}, \texttt{dzslides}, or \texttt{revealjs}.
-
 For Slidy, Slideous, reveal.js, and S5, the file produced by pandoc with
 the \texttt{-s/-\/-standalone} option embeds a link to JavaScript and
 CSS files, which are assumed to be available at the relative path
@@ -4994,40 +4626,30 @@ CSS files, which are assumed to be available at the relative path
 \protect\hyperlink{variables-for-slides}{Variables for slides}, above.)
 For DZSlides, the (relatively short) JavaScript and CSS are included in
 the file by default.
-
 With all HTML slide formats, the \texttt{-\/-self-contained} option can
 be used to produce a single file that contains all of the data necessary
 to display the slide show, including linked scripts, stylesheets,
 images, and videos.
-
 To produce a PDF slide show using beamer, type
-
 \begin{verbatim}
 pandoc -t beamer habits.txt -o habits.pdf
 \end{verbatim}
-
 Note that a reveal.js slide show can also be converted to a PDF by
 printing it to a file from the browser.
-
 To produce a Powerpoint slide show, type
-
 \begin{verbatim}
 pandoc habits.txt -o habits.pptx
 \end{verbatim}
-
 \hypertarget{structuring-the-slide-show}{%
 \subsection{Structuring the slide
 show}\label{structuring-the-slide-show}}
-
 By default, the \emph{slide level} is the highest header level in the
 hierarchy that is followed immediately by content, and not another
 header, somewhere in the document. In the example above, level 1 headers
 are always followed by level 2 headers, which are followed by content,
 so 2 is the slide level. This default can be overridden using the
 \texttt{-\/-slide-level} option.
-
 The document is carved up into slides according to the following rules:
-
 \begin{itemize}
 \item
   A horizontal rule always starts a new slide.
@@ -5048,21 +4670,17 @@ The document is carved up into slides according to the following rules:
   block, if present. (In the case of beamer, this can be disabled by
   commenting out some lines in the default template.)
 \end{itemize}
-
 These rules are designed to support many different styles of slide show.
 If you don't care about structuring your slides into sections and
 subsections, you can just use level 1 headers for all each slide. (In
 that case, level 1 will be the slide level.) But you can also structure
 the slide show into sections, as in the example above.
-
 Note: in reveal.js slide shows, if slide level is 2, a two-dimensional
 layout will be produced, with level 1 headers building horizontally and
 level 2 headers building vertically. It is not recommended that you use
 deeper nesting of section levels with reveal.js.
-
 \hypertarget{incremental-lists}{%
 \subsection{Incremental lists}\label{incremental-lists}}
-
 By default, these writers produce lists that display ``all at once.'' If
 you want your lists to display incrementally (one item at a time), use
 the \texttt{-i} option. If you want a particular list to depart from the
@@ -5070,61 +4688,43 @@ default, put it in a \texttt{div} block with class \texttt{incremental}
 or \texttt{nonincremental}. So, for example, using the
 \texttt{fenced\ div} syntax, the following would be incremental
 regardless of the document default:
-
 \begin{verbatim}
 ::: incremental
-
 - Eat spaghetti
 - Drink wine
-
 :::
 \end{verbatim}
-
 or
-
 \begin{verbatim}
 ::: nonincremental
-
 - Eat spaghetti
 - Drink wine
-
 :::
 \end{verbatim}
-
 While using \texttt{incremental} and \texttt{nonincremental} divs are
 the recommended method of setting incremental lists on a per-case basis,
 an older method is also supported: putting lists inside a blockquote
 will depart from the document default (that is, it will display
 incrementally without the \texttt{-i} option and all at once with the
 \texttt{-i} option):
-
 \begin{verbatim}
 > - Eat spaghetti
 > - Drink wine
 \end{verbatim}
-
 Both methods allow incremental and nonincremental lists to be mixed in a
 single document.
-
 \hypertarget{inserting-pauses}{%
 \subsection{Inserting pauses}\label{inserting-pauses}}
-
 You can add ``pauses'' within a slide by including a paragraph
 containing three dots, separated by spaces:
-
 \begin{verbatim}
 # Slide with a pause
-
 content before the pause
-
 . . .
-
 content after the pause
 \end{verbatim}
-
 \hypertarget{styling-the-slides}{%
 \subsection{Styling the slides}\label{styling-the-slides}}
-
 You can change the style of HTML slides by putting customized CSS files
 in \texttt{\$DATADIR/s5/default} (for S5), \texttt{\$DATADIR/slidy} (for
 Slidy), or \texttt{\$DATADIR/slideous} (for Slideous), where
@@ -5133,29 +4733,22 @@ Slidy), or \texttt{\$DATADIR/slideous} (for Slideous), where
 system data directory (generally
 \texttt{\$CABALDIR/pandoc-VERSION/s5/default}). Pandoc will look there
 for any files it does not find in the user data directory.
-
 For dzslides, the CSS is included in the HTML file itself, and may be
 modified there.
-
 All \href{https://github.com/hakimel/reveal.js\#configuration}{reveal.js
 configuration options} can be set through variables. For example, themes
 can be used by setting the \texttt{theme} variable:
-
 \begin{verbatim}
 -V theme=moon
 \end{verbatim}
-
 Or you can specify a custom stylesheet using the \texttt{-\/-css}
 option.
-
 To style beamer slides, you can specify a \texttt{theme},
 \texttt{colortheme}, \texttt{fonttheme}, \texttt{innertheme}, and
 \texttt{outertheme}, using the \texttt{-V} option:
-
 \begin{verbatim}
 pandoc -t beamer habits.txt -V theme:Warsaw -o habits.pdf
 \end{verbatim}
-
 Note that header attributes will turn into slide attributes (on a
 \texttt{\textless{}div\textgreater{}} or
 \texttt{\textless{}section\textgreater{}}) in HTML slide formats,
@@ -5164,42 +4757,30 @@ attribute that affects slides is the \texttt{allowframebreaks} class,
 which sets the \texttt{allowframebreaks} option, causing multiple slides
 to be created if the content overfills the frame. This is recommended
 especially for bibliographies:
-
 \begin{verbatim}
 # References {.allowframebreaks}
 \end{verbatim}
-
 \hypertarget{speaker-notes}{%
 \subsection{Speaker notes}\label{speaker-notes}}
-
 Speaker notes are supported in reveal.js and PowerPoint (pptx) output.
 You can add notes to your Markdown document thus:
-
 \begin{verbatim}
 ::: notes
-
 This is my note.
-
 - It can contain Markdown
 - like this list
-
 :::
 \end{verbatim}
-
 To show the notes window in reveal.js, press \texttt{s} while viewing
 the presentation. Speaker notes in PowerPoint will be available, as
 usual, in handouts and presenter view.
-
 Notes are not yet supported for other slide formats, but the notes will
 not appear on the slides themselves.
-
 \hypertarget{columns}{%
 \subsection{Columns}\label{columns}}
-
 To put material in side by side columns, you can use a native div
 container with class \texttt{columns}, containing two or more div
 containers with class \texttt{column} and a \texttt{width} attribute:
-
 \begin{verbatim}
 :::::::::::::: {.columns}
 ::: {.column width="40%"}
@@ -5210,89 +4791,67 @@ contents...
 :::
 ::::::::::::::
 \end{verbatim}
-
 \hypertarget{frame-attributes-in-beamer}{%
 \subsection{Frame attributes in
 beamer}\label{frame-attributes-in-beamer}}
-
 Sometimes it is necessary to add the LaTeX \texttt{{[}fragile{]}} option
 to a frame in beamer (for example, when using the \texttt{minted}
 environment). This can be forced by adding the \texttt{fragile} class to
 the header introducing the slide:
-
 \begin{verbatim}
 # Fragile slide {.fragile}
 \end{verbatim}
-
 All of the other frame attributes described in Section 8.1 of the
 \href{http://ctan.math.utah.edu/ctan/tex-archive/macros/latex/contrib/beamer/doc/beameruserguide.pdf}{Beamer
 User's Guide} may also be used: \texttt{allowdisplaybreaks},
 \texttt{allowframebreaks}, \texttt{b}, \texttt{c}, \texttt{t},
 \texttt{environment}, \texttt{label}, \texttt{plain}, \texttt{shrink},
 \texttt{standout}, \texttt{noframenumbering}.
-
 \hypertarget{background-in-reveal.js-and-beamer}{%
 \subsection{Background in reveal.js and
 beamer}\label{background-in-reveal.js-and-beamer}}
-
 Background images can be added to self-contained reveal.js slideshows
 and to beamer slideshows.
-
 For the same image on every slide, use the configuration option
 \texttt{background-image} either in the YAML metadata block or as a
 command-line variable. (There are no other options in beamer and the
 rest of this section concerns reveal.js slideshows.)
-
 For reveal.js, you can instead use the reveal.js-native option
 \texttt{parallaxBackgroundImage}. You can also set
 \texttt{parallaxBackgroundHorizontal} and
 \texttt{parallaxBackgroundVertical} the same way and must also set
 \texttt{parallaxBackgroundSize} to have your values take effect.
-
 To set an image for a particular reveal.js slide, add
 \texttt{\{data-background-image="/path/to/image"\}} to the first
 slide-level header on the slide (which may even be empty).
-
 In reveal.js's overview mode, the parallaxBackgroundImage will show up
 only on the first slide.
-
 Other reveal.js background settings also work on individual slides,
 including \texttt{data-background-size},
 \texttt{data-background-repeat}, \texttt{data-background-color},
 \texttt{data-transition}, and \texttt{data-transition-speed}.
-
 See the
 \href{https://github.com/hakimel/reveal.js\#slide-backgrounds}{reveal.js
 documentation} for more details.
-
 For example in reveal.js:
-
 \begin{verbatim}
 ---
 title: My Slideshow
 parallaxBackgroundImage: /path/to/my/background_image.png
 ---
-
 ## Slide One
-
 Slide 1 has background_image.png as its background.
-
 ## {data-background-image="/path/to/special_image.jpg"}
-
 Slide 2 has a special image for its background, even though the header has no content.
 \end{verbatim}
-
 \hypertarget{creating-epubs-with-pandoc}{%
 \section{Creating EPUBs with pandoc}\label{creating-epubs-with-pandoc}}
-
 \hypertarget{epub-metadata}{%
 \subsection{EPUB Metadata}\label{epub-metadata}}
-
 EPUB metadata may be specified using the \texttt{-\/-epub-metadata}
 option, but if the source document is Markdown, it is better to use a
 \protect\hyperlink{extension-yaml_metadata_block}{YAML metadata block}.
 Here is an example:
-
 \begin{verbatim}
 ---
 title:
@@ -5314,9 +4873,7 @@ ibooks:
   version: 1.3.4
 ...
 \end{verbatim}
-
 The following fields are recognized:
-
 \begin{description}
 \item[\texttt{identifier}]
 Either a string value or an object with fields \texttt{text} and
@@ -5371,7 +4928,6 @@ Either \texttt{ltr} or \texttt{rtl}. Specifies the
 element}.
 \item[\texttt{ibooks}]
 iBooks-specific metadata, with the following fields:
-
 \begin{itemize}
 \tightlist
 \item
@@ -5393,34 +4949,27 @@ iBooks-specific metadata, with the following fields:
   \texttt{vertical}\textbar{}\texttt{horizontal}\textbar{}\texttt{default}
 \end{itemize}
 \end{description}
-
 \hypertarget{the-epubtype-attribute}{%
 \subsection{\texorpdfstring{The \texttt{epub:type}
 attribute}{The epub:type attribute}}\label{the-epubtype-attribute}}
-
 For \texttt{epub3} output, you can mark up the header that corresponds
 to an EPUB chapter using the
 \href{http://www.idpf.org/epub/31/spec/epub-contentdocs.html\#sec-epub-type-attribute}{\texttt{epub:type}
 attribute}. For example, to set the attribute to the value
 \texttt{prologue}, use this markdown:
-
 \begin{verbatim}
 # My chapter {epub:type=prologue}
 \end{verbatim}
-
 Which will result in:
-
 \begin{verbatim}
 <body epub:type="frontmatter">
   <section epub:type="prologue">
     <h1>My chapter</h1>
 \end{verbatim}
-
 Pandoc will output
 \texttt{\textless{}body\ epub:type="bodymatter"\textgreater{}}, unless
 you use one of the following values, in which case either
 \texttt{frontmatter} or \texttt{backmatter} will be output.
-
 \begin{longtable}[]{@{}ll@{}}
 \toprule
 \texttt{epub:type} of first section & \texttt{epub:type} of
@@ -5445,10 +4994,8 @@ conclusion & backmatter\tabularnewline
 epigraph & backmatter\tabularnewline
 \bottomrule
 \end{longtable}
-
 \hypertarget{linked-media}{%
 \subsection{Linked media}\label{linked-media}}
-
 By default, pandoc will download media referenced from any
 \texttt{\textless{}img\textgreater{}},
 \texttt{\textless{}audio\textgreater{}},
@@ -5459,7 +5006,6 @@ completely self-contained EPUB. If you want to link to external media
 resources instead, use raw HTML in your source and add
 \texttt{data-external="1"} to the tag with the \texttt{src} attribute.
 For example:
-
 \begin{verbatim}
 <audio controls="1">
   <source src="http://example.com/music/toccata.mp3"
@@ -5467,10 +5013,8 @@ For example:
   </source>
 </audio>
 \end{verbatim}
-
 \hypertarget{syntax-highlighting}{%
 \section{Syntax highlighting}\label{syntax-highlighting}}
-
 Pandoc will automatically highlight syntax in
 \protect\hyperlink{fenced-code-blocks}{fenced code blocks} that are
 marked with a language name. The Haskell library
@@ -5479,29 +5023,23 @@ highlighting. Currently highlighting is supported only for HTML, EPUB,
 Docx, Ms, and LaTeX/PDF output. To see a list of language names that
 pandoc will recognize, type
 \texttt{pandoc\ -\/-list-highlight-languages}.
-
 The color scheme can be selected using the \texttt{-\/-highlight-style}
 option. The default color scheme is \texttt{pygments}, which imitates
 the default color scheme used by the Python library pygments (though
 pygments is not actually used to do the highlighting). To see a list of
 highlight styles, type \texttt{pandoc\ -\/-list-highlight-styles}.
-
 If you are not satisfied with the predefined styles, you can use
 \texttt{-\/-print-highlight-style} to generate a JSON \texttt{.theme}
 file which can be modified and used as the argument to
 \texttt{-\/-highlight-style}. To get a JSON version of the
 \texttt{pygments} style, for example:
-
 \begin{verbatim}
 pandoc --print-highlight-style pygments > my.theme
 \end{verbatim}
-
 Then edit \texttt{my.theme} and use it like this:
-
 \begin{verbatim}
 pandoc --highlight-style my.theme
 \end{verbatim}
-
 If you are not satisfied with the built-in highlighting, or you want
 highlight a language that isn't supported, you can use the
 \texttt{-\/-syntax-definition} option to load a
@@ -5510,67 +5048,49 @@ XML syntax definition file}. Before writing your own, have a look at
 KDE's
 \href{https://github.com/KDE/syntax-highlighting/tree/master/data/syntax}{repository
 of syntax definitions}.
-
 To disable highlighting, use the \texttt{-\/-no-highlight} option.
-
 \hypertarget{custom-styles-in-docx}{%
 \section{Custom Styles in Docx}\label{custom-styles-in-docx}}
-
 \hypertarget{input}{%
 \subsection{Input}\label{input}}
-
 The docx reader, by default, only reads those styles that it can convert
 into pandoc elements, either by direct conversion or interpreting the
 derivation of the input document's styles.
-
 By enabling the \protect\hyperlink{ext-styles}{\texttt{styles}
 extension} in the docx reader (\texttt{-f\ docx+styles}), you can
 produce output that maintains the styles of the input document, using
 the \texttt{custom-style} class. Paragraph styles are interpreted as
 divs, while character styles are interpreted as spans.
-
 For example, using the \texttt{custom-style-reference.docx} file in the
 test directory, we have the following different outputs:
-
 Without the \texttt{+styles} extension:
-
 \begin{verbatim}
 $ pandoc test/docx/custom-style-reference.docx -f docx -t markdown
 This is some text.
-
 This is text with an *emphasized* text style. And this is text with a
 **strengthened** text style.
-
 > Here is a styled paragraph that inherits from Block Text.
 \end{verbatim}
-
 And with the extension:
-
 \begin{verbatim}
 $ pandoc test/docx/custom-style-reference.docx -f docx+styles -t markdown
-
 ::: {custom-style="FirstParagraph"}
 This is some text.
 :::
-
 ::: {custom-style="BodyText"}
 This is text with an [emphasized]{custom-style="Emphatic"} text style.
 And this is text with a [strengthened]{custom-style="Strengthened"}
 text style.
 :::
-
 ::: {custom-style="MyBlockStyle"}
 > Here is a styled paragraph that inherits from Block Text.
 :::
 \end{verbatim}
-
 With these custom styles, you can use your input document as a
 reference-doc while creating docx output (see below), and maintain the
 same styles in your input and output files.
-
 \hypertarget{output}{%
 \subsection{Output}\label{output}}
-
 By default, pandoc's docx output applies a predefined set of styles for
 blocks such as paragraphs and block quotes, and uses largely default
 formatting (italics, bold) for inlines. This will work for most
@@ -5578,36 +5098,28 @@ purposes, especially alongside a \texttt{reference.docx} file. However,
 if you need to apply your own styles to blocks, or match a preexisting
 set of styles, pandoc allows you to define custom styles for blocks and
 text using \texttt{div}s and \texttt{span}s, respectively.
-
 If you define a \texttt{div} or \texttt{span} with the attribute
 \texttt{custom-style}, pandoc will apply your specified style to the
 contained elements. So, for example using the \texttt{bracketed\_spans}
 syntax,
-
 \begin{verbatim}
 [Get out]{custom-style="Emphatically"}, he said.
 \end{verbatim}
-
 would produce a docx file with ``Get out'' styled with character style
 \texttt{Emphatically}. Similarly, using the \texttt{fenced\_divs}
 syntax,
-
 \begin{verbatim}
 Dickinson starts the poem simply:
-
 ::: {custom-style="Poetry"}
 | A Bird came down the Walk---
 | He did not know I saw---
 :::
 \end{verbatim}
-
 would style the two contained lines with the \texttt{Poetry} paragraph
 style.
-
 If the styles are not yet in your reference.docx, they will be defined
 in the output file as inheriting from normal text. If they are already
 defined, pandoc will not alter the definition.
-
 This feature allows for greatest customization in conjunction with
 \href{http://pandoc.org/filters.html}{pandoc filters}. If you want all
 paragraphs after block quotes to be indented, you can write a filter to
@@ -5615,36 +5127,27 @@ apply the styles necessary. If you want all italics to be transformed to
 the \texttt{Emphasis} character style (perhaps to change their color),
 you can write a filter which will transform all italicized inlines to
 inlines within an \texttt{Emphasis} custom-style \texttt{span}.
-
 \hypertarget{custom-writers}{%
 \section{Custom writers}\label{custom-writers}}
-
 Pandoc can be extended with custom writers written in
 \href{http://www.lua.org}{lua}. (Pandoc includes a lua interpreter, so
 lua need not be installed separately.)
-
 To use a custom writer, simply specify the path to the lua script in
 place of the output format. For example:
-
 \begin{verbatim}
 pandoc -t data/sample.lua
 \end{verbatim}
-
 Creating a custom writer requires writing a lua function for each
 possible element in a pandoc document. To get a documented example which
 you can modify according to your needs, do
-
 \begin{verbatim}
 pandoc --print-default-data-file sample.lua
 \end{verbatim}
-
 \hypertarget{authors}{%
 \section{Authors}\label{authors}}
-
 Copyright 2006-2017 John MacFarlane (jgm@berkeley.edu). Released under
 the \href{http://www.gnu.org/copyleft/gpl.html}{GPL}, version 2 or
 greater. This software carries no warranty of any kind. (See COPYRIGHT
 for full copyright and warranty notices.) For a full list of
 contributors, see the file AUTHORS.md in the pandoc source code.
-
 \end{document}

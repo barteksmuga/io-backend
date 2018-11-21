@@ -1,27 +1,35 @@
 package io;
 
+import org.apache.catalina.connector.Connector;
+import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-
-import java.io.IOException;
 
 @SpringBootApplication
 public class IoApplication {
+
+    public static final String sourcePath = "/Users/Bartek/studia/io/data/";
+    private final int MAX_FILE_UPLOAD_SIZE = 10 * 1024 * 1024; // 10 MB
+
 
     public static void main (String[] args) {
         SpringApplication.run(IoApplication.class, args);
     }
 
     @Bean
-    public CommonsMultipartResolver getResolver() throws IOException {
-        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        //Set the maximum allowed size (in bytes) for each individual file.
-        resolver.setMaxUploadSizePerFile(5242880);//5MB
-        //You may also set other available properties.
-        return resolver;
+    public TomcatServletWebServerFactory containerFactory () {
+        return new TomcatServletWebServerFactory() {
+            protected void customizeConnector (Connector connector) {
+                super.customizeConnector(connector);
+                connector.setMaxPostSize(MAX_FILE_UPLOAD_SIZE);
+                connector.setMaxSavePostSize(MAX_FILE_UPLOAD_SIZE);
+                if (connector.getProtocolHandler() instanceof AbstractHttp11Protocol) {
+                    ((AbstractHttp11Protocol) connector.getProtocolHandler()).setMaxSwallowSize(MAX_FILE_UPLOAD_SIZE);
+                    logger.info(String.format("SET MaxSwallowSize %d", MAX_FILE_UPLOAD_SIZE));
+                }
+            }
+        };
     }
-
-    public static final String sourcePath = "/Users/Bartek/studia/io/data/";
 }

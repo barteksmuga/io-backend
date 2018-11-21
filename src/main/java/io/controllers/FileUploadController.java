@@ -1,64 +1,35 @@
 package io.controllers;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.validation.Valid;
-
-import io.helpers.FileValidator;
-import io.models.FileBucket;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.exceptions.models.FileUploadFailedException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-@RequestMapping("/api")
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+@RequestMapping("/api/file")
 @Controller
 public class FileUploadController {
-    public final static String UPLOAD_LOCATION = System.getProperty("java.io.tmpdir") + "/";
-    @Autowired
-    FileValidator fileValidator;
+    public final static String UPLOAD_LOCATION = "/Users/Bartek/studia/io/storage/";
 
-    @InitBinder("fileBucket")
-    protected void initBinderFileBucket (WebDataBinder binder) {
-        binder.setValidator(fileValidator);
-    }
-
-    @RequestMapping(value = "/file", method = RequestMethod.POST)
-    public String singleFileUpload (@RequestBody @Valid FileBucket fileBucket, BindingResult result, ModelMap model) throws IOException {
-        if (result.hasErrors()) {
-            System.out.println("validation errors");
-            return "singleFileUploader";
-        } else {
-            System.out.println("Fetching file");
-            MultipartFile multipartFile = fileBucket.getFile();
-            //Now do something with file...
-            FileCopyUtils.copy(fileBucket.getFile().getBytes(), new File(UPLOAD_LOCATION + fileBucket.getFile().getOriginalFilename()));
-            String fileName = multipartFile.getOriginalFilename();
-            model.addAttribute("fileName", fileName);
-            return "success";
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public ResponseEntity uploadSingeFile (@RequestParam("file") MultipartFile file) throws FileUploadFailedException, IOException {
+        if (file.isEmpty()) {
+            throw new FileUploadFailedException("File not attached.");
         }
-    }
-
-    @RequestMapping(value = "/file", method = RequestMethod.GET)
-    public String showAllFiles (Model model) {
-        File directory = new File(UPLOAD_LOCATION);
-        File[] files = directory.listFiles();
-        List<String> list = new ArrayList<String>();
-
-        for (File file : files) {
-            list.add(file.getName());
+        try {
+            byte[] fileBytes = file.getBytes();
+            Path filePath = Paths.get(UPLOAD_LOCATION + file.getOriginalFilename());
+            Files.write(filePath, fileBytes);
+        } catch (Exception e) {
+            throw new FileUploadFailedException(e.getMessage());
         }
-
-        model.addAttribute("files", list);
-        return "filelist";
-
+        System.out.println(String.format("File upload success. (%s)", file.getOriginalFilename()));
+        return ResponseEntity.status(HttpStatus.OK).body(file.getOriginalFilename());
     }
 }

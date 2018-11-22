@@ -31,3 +31,4 @@
 /src/main/java/.DS_Store
 storage/
 out/
+src/main/resources/application.properties

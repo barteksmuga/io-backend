@@ -1,6 +1,7 @@
 package io.controllers;
 
 import io.exceptions.models.FileUploadFailedException;
+import io.helpers.FileHelper;
 import io.models.File;
 import io.repositories.FileRepository;
 import javassist.NotFoundException;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/api/file")
@@ -34,9 +36,10 @@ public class FileController {
         } catch (Exception e) {
             throw new FileUploadFailedException(e.getMessage());
         }
+        String fileNameWithoutExtenxion = FileHelper.getOriginalFileNameWithouExtension(uploadingFile.getOriginalFilename());
         File file = new File(
                 UPLOAD_LOCATION,
-                uploadingFile.getOriginalFilename(),
+                fileNameWithoutExtenxion,
                 FilenameUtils.getExtension(uploadingFile.getOriginalFilename())
         );
         fileRepository.save(file);
@@ -60,17 +63,9 @@ public class FileController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity getByNameOrExtension (
-            @RequestParam(value = "name", required = false, defaultValue = "") String name,
-            @RequestParam(value = "extension", required = false, defaultValue = "") String extension
-    ) throws NotFoundException {
-        System.out.println("name " + name);
-        System.out.println("ext: " + extension);
-        Optional<File> optionalFile = fileRepository.findByNameOrExtension(name, extension);
-        if (!optionalFile.isPresent()) {
-            throw new NotFoundException("File not found.");
-        }
-        File file = optionalFile.get();
-        return ResponseEntity.status(HttpStatus.OK).body(file);
+    public ResponseEntity getByName (@RequestParam(value = "name") String name) {
+        List<File> fileList = fileRepository.findByName(name);
+        HttpStatus responseStatus = fileList.size() == 0 ? HttpStatus.NOT_FOUND : HttpStatus.OK;
+        return ResponseEntity.status(responseStatus).body(fileList);
     }
 }

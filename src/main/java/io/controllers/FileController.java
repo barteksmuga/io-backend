@@ -3,6 +3,7 @@ package io.controllers;
 import io.exceptions.models.FileUploadFailedException;
 import io.models.File;
 import io.repositories.FileRepository;
+import javassist.NotFoundException;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,24 +12,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 @RequestMapping("/api/file")
 @Controller
-public class FileUploadController {
+public class FileController {
     public final static String UPLOAD_LOCATION = "/Users/Bartek/studia/io/storage/";
 
     @Autowired
     private FileRepository fileRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity uploadSingeFile (@RequestParam("file") MultipartFile uploadingFile) throws FileUploadFailedException, IOException {
-        if (uploadingFile.isEmpty()) {
-            throw new FileUploadFailedException("File not attached.");
-        }
+    public ResponseEntity upload (@RequestParam("file") MultipartFile uploadingFile) throws FileUploadFailedException {
         try {
             byte[] fileBytes = uploadingFile.getBytes();
             Path filePath = Paths.get(UPLOAD_LOCATION + uploadingFile.getOriginalFilename());
@@ -44,5 +42,35 @@ public class FileUploadController {
         fileRepository.save(file);
         System.out.println(String.format("File upload success. (%s)", uploadingFile.getOriginalFilename()));
         return ResponseEntity.status(HttpStatus.OK).body(uploadingFile.getOriginalFilename());
+    }
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public ResponseEntity getAll () {
+        return ResponseEntity.status(HttpStatus.OK).body(fileRepository.findAll());
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity getById (@PathVariable("id") long id) throws NotFoundException {
+        Optional<File> optionalFile = fileRepository.findById(id);
+        if (!optionalFile.isPresent()) {
+            throw new NotFoundException("File not found.");
+        }
+        File file = optionalFile.get();
+        return ResponseEntity.status(HttpStatus.OK).body(file);
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ResponseEntity getByNameOrExtension (
+            @RequestParam(value = "name", required = false, defaultValue = "") String name,
+            @RequestParam(value = "extension", required = false, defaultValue = "") String extension
+    ) throws NotFoundException {
+        System.out.println("name " + name);
+        System.out.println("ext: " + extension);
+        Optional<File> optionalFile = fileRepository.findByNameOrExtension(name, extension);
+        if (!optionalFile.isPresent()) {
+            throw new NotFoundException("File not found.");
+        }
+        File file = optionalFile.get();
+        return ResponseEntity.status(HttpStatus.OK).body(file);
     }
 }

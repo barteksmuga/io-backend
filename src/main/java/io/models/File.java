@@ -2,7 +2,6 @@ package io.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -20,14 +19,6 @@ public class File implements Serializable {
 
     @Column(name = "extension", nullable = false)
     private String extension;
-
-//    @Temporal(TemporalType.DATE)
-//    @Column(name = "date_created")
-    private Date dateCreated;
-
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @Column(name = "date_updated")
-    private Date dateUpdated;
 
     public File () {}
 
@@ -49,14 +40,6 @@ public class File implements Serializable {
         return extension;
     }
 
-    public Date getDateCreated () {
-        return dateCreated;
-    }
-
-    public Date getDateUpdated () {
-        return dateUpdated;
-    }
-
     public String getName () {
         return name;
     }
@@ -73,14 +56,12 @@ public class File implements Serializable {
         return id == file.id &&
                 Objects.equals(path, file.path) &&
                 Objects.equals(name, file.name) &&
-                Objects.equals(extension, file.extension) &&
-                Objects.equals(dateCreated, file.dateCreated) &&
-                Objects.equals(dateUpdated, file.dateUpdated);
+                Objects.equals(extension, file.extension);
     }
 
     @Override
     public int hashCode () {
-        return Objects.hash(id, path, name, extension, dateCreated, dateUpdated);
+        return Objects.hash(id, path, name, extension);
     }
 
     @Override

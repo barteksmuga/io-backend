@@ -25,7 +25,7 @@ public class FileController {
     @Autowired
     private FileRepository fileRepository;
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity upload (@RequestParam("file") MultipartFile uploadingFile) throws FileUploadFailedException {
         try {
             byte[] fileBytes = uploadingFile.getBytes();

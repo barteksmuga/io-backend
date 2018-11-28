@@ -22,7 +22,7 @@ import java.util.Optional;
 @RequestMapping("/api/file")
 @Controller
 public class FileController {
-    public final static String UPLOAD_LOCATION = "/Users/Bartek/studia/io/storage/";
+    public final static String UPLOAD_LOCATION = "C:\\Users\\skaro\\IdeaProjects\\JavaTexGit\\io-backend\\data\\";
 
     @Autowired
     private FileRepository fileRepository;

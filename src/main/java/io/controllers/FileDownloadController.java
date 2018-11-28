@@ -2,6 +2,9 @@ package io.controllers;
 
 import io.exceptions.models.FileDownloadFailedException;
 import io.exceptions.models.FileUploadFailedException;
+import io.repositories.FileRepository;
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
@@ -20,16 +23,27 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @RequestMapping("/api/file")
 @Controller
 public class FileDownloadController {
-    public final static String DOWNLOAD_LOCATION = "C:\\Users\\skaro\\IdeaProjects\\JavaTexGit\\io-backend\\data\\";
+    @Autowired
+    private FileRepository fileRepository;
 
     @RequestMapping(path = "/download", method = RequestMethod.GET)
     public ResponseEntity<Resource> downloadSingleFile(@RequestParam("file") String fileName, HttpServletResponse response) throws IOException, FileUploadFailedException, FileDownloadFailedException {
-        String fileLocation = DOWNLOAD_LOCATION + fileName;
-        File file = new File(fileLocation);
+        String filePath = "";
+        List<io.models.File> files = fileRepository.findAll();
+        for(int i = 0; i < files.size(); i++)
+        {
+            if((files.get(i).getName() + "." + files.get(i).getExtension()).equals(fileName))
+            {
+                filePath = files.get(i).getPath() + fileName;
+            }
+        }
+
+        File file = new File(filePath);
         Path path = Paths.get(file.getAbsolutePath());
         ByteArrayResource resource;
         try{
@@ -43,7 +57,7 @@ public class FileDownloadController {
             // get your file as InputStream
             InputStream is = new FileInputStream(file);
             // copy it to response's OutputStream
-            org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
+            IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException ex) {
             throw new RuntimeException("IOError writing file to output stream");

@@ -26,8 +26,7 @@ import java.nio.file.Paths;
 public class FileDownloadController {
     public final static String DOWNLOAD_LOCATION = "C:\\Users\\skaro\\IdeaProjects\\JavaTexGit\\io-backend\\data\\";
 
-    // TODO: Error handling dla niewłaściwej nazwy
-    @RequestMapping(path = "/download", method = RequestMethod.GET) // path czy value?
+    @RequestMapping(path = "/download", method = RequestMethod.GET)
     public ResponseEntity<Resource> downloadSingleFile(@RequestParam("file") String fileName, HttpServletResponse response) throws IOException, FileUploadFailedException, FileDownloadFailedException {
         String fileLocation = DOWNLOAD_LOCATION + fileName;
         File file = new File(fileLocation);
@@ -39,7 +38,7 @@ public class FileDownloadController {
             throw new FileDownloadFailedException("Such file doesn't exist.");
         }
 
-        // pdf'y i inne
+        // pdf'y i inne nietekstowe pliki
         try {
             // get your file as InputStream
             InputStream is = new FileInputStream(file);

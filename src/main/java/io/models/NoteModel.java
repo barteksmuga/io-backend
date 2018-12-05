@@ -1,43 +1,42 @@
 package io.models;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 
 @Entity
-@Table(name="note_io")
-@EntityListeners(AuditingEntityListener.class)
-public class NoteModel implements Serializable {
+@Table(name = "note_io")
+public class NoteModel extends AuditModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    private String firstName;
+    @Column(name = "title")
+    private String title;
 
     @NotBlank
-    private String lastName;
+    @Column(name = "content")
+    private String content;
 
     @NotBlank
     private String text;
 
-    public String getFirstName() {
-        return firstName;
+
+    public String getTitle() {
+        return title;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getContent() {
+        return content;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getText() {

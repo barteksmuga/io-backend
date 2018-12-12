@@ -25,18 +25,12 @@ public class UserController {
     @PostMapping("/user")
     public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
 
-
-
-
+        
         user.setActive(false);
 
         Role role = new Role();
 
-        role.setAuthorities("USER");
-
-        String checkIsProfessor = user.getEmail().substring(user.getEmail().indexOf("@") + 1);
-
-        if (checkIsProfessor.equals("agh.edu.pl")) {
+        if (user.getEmail().substring(user.getEmail().indexOf("@") + 1).equals("agh.edu.pl")) {
 
             Role role1 = new Role();
 

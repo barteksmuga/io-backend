@@ -13,11 +13,12 @@ public class Role {
     private long roleId;
 
     @Column(name = "authorities", nullable = false)
-    @ColumnDefault("'USER'")
     //@org.hibernate.annotations.ColumnDefault("USER")
     private  String authorities;
 
     public Role() {
+
+        authorities=new String("USER");
     }
 
 

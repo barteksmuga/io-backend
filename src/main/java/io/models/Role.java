@@ -1,30 +1,41 @@
 package io.models;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
-    private int roleId;
+    private long roleId;
 
-    @Column(name = "role")
-    private  String role;
+    @Column(name = "authorities", nullable = false)
+    @ColumnDefault("'USER'")
+    //@org.hibernate.annotations.ColumnDefault("USER")
+    private  String authorities;
 
     public Role() {
     }
 
-    public int getRoleId() {
-        return roleId;
+
+
+
+    public String getAuthorities() {
+        return authorities;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(long roleId) {
         this.roleId = roleId;
     }
 
-    public String getRole() {
-        return role;
+    public long getRoleId() {
+        return roleId;
+    }
+
+    public void setAuthorities(String authorities) {
+        this.authorities = authorities;
     }
 }

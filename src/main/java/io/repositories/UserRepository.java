@@ -7,9 +7,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
-    @Query(value = "SELECT * FROM users u WHERE u.email = :email", nativeQuery = true)
-    List<User> findByEmail (@Param("email") String login);
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    Optional<User> findUserByEmail(String email);
+
+    Optional<Boolean> findUserByIsActive(boolean isActive);
+
 }

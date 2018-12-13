@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class IoApplication {
 
-    public static final String sourcePath = "/Users/Bartek/studia/io/data/";
+    public static final String sourcePath = "/root/IO-server/io-backend/data/";
     private final int MAX_FILE_UPLOAD_SIZE = 10 * 1024 * 1024; // 10 MB
 
 

@@ -1,0 +1,190 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\date{}
+
+\begin{document}
+
+Termodynamika jest gałęzią nauki zajmującą się, ogólnie biorąc,
+przekształceniami energii z jednej postaci w drugą oraz właściwościami
+ciał biorących udział w tych procesach. W szczególności termodynamika
+techniczna zajmuje się zależnościami między ciepłem i pracą oraz
+właściwościami fizykochemicznymi systemów materialnych.
+
+Ciepło właściwe jest to własność termofizyczna płynu. Średnie ciepło
+właściwe:
+
+\texttt{(przemiany,~T,P)~(1..31)}
+
+zależne jest od rodzaju przemiany, temperatury i ciśnienia, przy czym
+zależność od temperatury jest silniejsza niż od ciśnienia. Ta ogólna
+zależność może być ograniczona do uzależnienia ciepła właściwego tylko
+od przemiany, jak to ma miejsce w gazach doskonałych, lub od przemiany i
+temperatury, co charakteryzuje gazy półdoskonałe. Szczególną rolę w
+termodynamice odgrywają ciepła właściwe dwu przemian: • odbywającej się
+przy stałej objętości, czyli izochorycznej: Cv - ciepło właściwe przy
+stałej objętości, J/ kg·K
+
+• odbywającej się przy stałym ciśnieniu, czyli izobarycznej: Cp - ciepło
+właściwe przy stałym ciśnieniu, J/kg·K
+
+Stała objętość: powietrze ogrzewane w plastikowym/szklanym naczyniu.
+Stałe ciśnienie: ogrzewany/ochładzany balonik. Działanie otoczenia na
+układ termodynamiczny nazywane jest pracą, jeżeli wynik tego działania
+można sprowadzić tylko do zmiany położenia ciężaru, znajdującego się
+poza układem, względem poziomu odniesienia. Działania otoczenia na układ
+zamknięty, które nie mogą być zaliczane do różnego rodzaju prac, są
+nazywane w termodynamice zewnętrznym ciepłem układu, a sposób w jaki
+jest przekazywane to ciepło wymianą ciepła, przepływem ciepła lub
+przenoszeniem ciepła. Wymiana ciepła jest realizowana na różne pod
+względem fizycznym sposoby: przewodzenie, konwekcję i radiacyjną wymianę
+ciepła. W układach otwartych energia jest przekazywana również przez
+granice układu wraz z przepływem substancji w postaci energii
+kinetycznej, potencjalnej lub entalpii, zwanej często w technice energią
+cieplną. W przypadku gdy zjawiska wymiany ciepła zmieniają się w miarę
+upływu czasu, występuje nieustalona wymiana ciepła, a gdy nie zmieniają
+się w czasie -- ustalona wymiana ciepła. Wymiana ciepła występuje pod
+wpływem różnicy temperatury. Przy rozpatrywaniu zjawisk wymiany ciepła
+jest konieczna znajomość pola temperatury. Polem temperatury jest
+nazywany zbiór wartości temperatury we wszystkich punktach
+rozpatrywanego ciała w danej chwili. Pole temperatury T jest określone
+przez zależność temperatury od współrzędnych przestrzeni (np.
+kartezjańskich x, y, z) oraz od czasu t: T=f(x,y,z,t) ( 1.1) Gdy pole
+temperatury zmienia się w czasie, wymiana ciepła jest nieustalona.
+Wymiana ciepła jest ustalona, gdy pole temperatury nie zmienia się w
+czasie, czyli gdy temperatura jest tylioi:o funkcją współrzędnych
+przestrzeni T = F( x,y,z), = 0 (1.2) W zależności od liczby
+współrzędnych przestrzeni, w kierunku których zmienia się temperatura,
+pole temperatury i wymiana ciepła są jedno-, dwu- lub trójwymiarowe.
+Zbiór punktów przestrzeni o jednakowej temperaturze tworzy powierzchnię
+izotermiczną. Zbiór punktów powierzchni o jednakowej temperaturze tworzy
+linię izotermiczną. Ponieważ w jednym punkcie przestrzeni nie mogą
+występować różne temperatury tej samej substancji, powierzchnie (lub
+linie) izotermiczne nie przecinają się, lecz tworzą powierzchnie (lub
+linie) zamknięte albo kończą się na powierzchni ciała. Zarówno w
+termodynamice, jak i w wymianie ciepła ciepło Q {[}kJ{]} jest wielkością
+skalarną, chociaż mówimy o kierunku przepływu ciepła od wyższej do
+niższej temperatury. Stosunek elementarnej ilości ciepła dQ do czasu
+trwania wymiany tej ilości ciepła jest nazywany strumieniem ciepła
+(wyrażanym w W)
+
+a w warunkach ustalonych:
+
+Strumień ciepła, podobnie jak i ciepło, jest wielkością skalarną. Po
+odniesieniu strumienia ciepła do jednostki pola powierzchni A (ściśle
+zorientowanej w przestrzeni) otrzymuje się wektor zwany gęstością
+strumienia ciepła (wyrażoną w ). Jest to wektor prostopadły do
+powierzchni izotermicznej, skierowany zgodnie ze spadkiem temperatury, o
+module równym stosunkowi elementarnego strumienia ciepła dQ do
+elementarnego pola powierzchni dA, przez którą strumień ten przepływa
+
+lub w zapisie wektorowym:
+
+W szczególnym przypadku gęstość strumienia ciepła w każdym punkcie
+rozpatrywanej powierzchni jest taka sama i wynosi:
+
+Punktem wyjścia do określenia pola temperatury w ciele stałym jest
+równanie różniczkowe przewodzenia ciepła, które otrzymuje się na
+podstawie równania bilansu energii dla elementarnej objętości
+substancji. W prostokątnym układzie współrzędnych x, y, z elementarna
+objętość substancji jest przedstawiona jako prostopadłościan o bokach
+dx, dy, dz i objętości dV = dxdydz (rys. 1.5).
+
+Y Przy stałym ciśnieniu bilans energii dla ciała stałego przechodzi w
+bilans entalpii. Przyrost entalpii substancji (o gęstości p i cieple
+właściwym cP) zawartej w elementarnej objętości d V zmienia się w czasie
+dt o wartość
+
+Ta zmiana entalpii wywołana jest doprowadzaniem ciepła z zewnątrz przez
+przewodzenie i ewentualnie doprowadzaniem ciepła od wewnątrz, gdy
+istnieją wewnętrzne źródła ciepła. Strumień ciepła przewodzony wzdłuż
+osi x zmienia się na odległości dx o
+
+Analogicznie otrzymuje się zmiany strumieni ciepła w pozostałych
+kierunkach osi współrzędnych. Pozwala to na zestawienie równania bilansu
+entalpii dla izotropowego ciała stałego w postaci równania
+
+Wyprowadzone niżej wzory na jednostkową energię cieplną u i entalpię h =
+u + Pv nazywane są też kalorycznymi równaniami stanu. Entalpia
+reprezentuje energię cieplną w równaniach bilansowych systemów
+otwartych, z jakimi bardzo często mamy do czynienia w technice. W
+ogólnym przypadku substancji prostej, kiedy stan tej substancji jest w
+zupełności określony przez 2 parametry: T, P lub T, v (ew. P, v),
+energia cieplna i entalpia są funkcjami dwu zmiennych: u = f(T,v) h =
+f(T,P) Gazy doskonale i półdoskonale Na energię cieplną gazów
+doskonałych i półdoskonałych składa się wyłącznie energia kinetyczna
+ruchów molekuł i atomów, pomija się energię potencjalną oddziaływania
+tych cząstek na siebie. Chodzi tu o energie ruchu postępowego i
+obrotowego a w gazach półdoskonałych jeszcze o energię ruchu drgającego
+atomów w molekule. Energia cieplna 1 kg gazu doskonałego lub
+półdoskonałego może być najprościej wyznaczona z równania I zasady
+termodynamiki:
+
+zastosowanego do przemiany izochorycznej, w której dla v = const jest dv
+= 0 tak że równanie I Z.T. upraszcza się do postaci
+
+Wynika z tego, że ciepło doprowadzone do ciała zachowującego stałą
+objętość w całości podwyższa energię wewnętrzną tego ciała. Ale ciepło
+przemiany izochorycznej określa wzór dqv = cvdT (3.36) Przyrównując
+stronami (3.35) i (3.36), otrzymuje się:
+
+w którym indeks v oznacza różniczkowanie przy v = const. Dla gazów
+doskonałych jest oczywiście cv = const f(T) i całkowanie równania (3.37)
+w granicach od stanu odniesienia (normalnego, standardowego) do stanu
+bieżącego daje
+
+czyli u - u 0 = cv· (T-T0 ) = cv· ( t - t 0 ) (3.39) Przyjmuje się
+temperaturę stanu odniesienia T0 = 273,15 K= 0°C i wtedy:
+
+\end{document}

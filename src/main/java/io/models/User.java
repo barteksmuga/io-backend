@@ -1,25 +1,22 @@
 package io.models;
 
-import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "username", nullable = false)
     @NotNull(message = "email is needed")
     @Email(message = "give valid email")
     private String email;
@@ -28,12 +25,12 @@ public class User implements Serializable {
     @Size(min=7, message = "password should have at least 7 characters")
     private String password;
 
-    @Column(name = "isActive", nullable = false)
+    @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public User(){}
 
@@ -42,19 +39,31 @@ public class User implements Serializable {
         this.isActive = false;
     }
 
-    public void setHashedPassword() {
-        String hashedPassword = BCrypt.hashpw(this.password, BCrypt.gensalt());
-        hashedPassword="{bcrypt}"+hashedPassword;
-        setPassword(hashedPassword);
-    }
-    private void setPassword(String password) {
+
+    public  void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getEmail() { return this.email; }
 
     public int getId() {
         return id;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getActive() {
+        return isActive;
     }
 
     @Override
@@ -69,7 +78,7 @@ public class User implements Serializable {
 
     public void addRoles(Role theRole){
         if(roles==null){
-            roles=new HashSet<>();
+            roles=new ArrayList<>();
         }
         roles.add(theRole);
     }

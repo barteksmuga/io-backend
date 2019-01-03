@@ -26,7 +26,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @PropertySource("classpath:application.example.properties")
 public class IoApplication {
 
+<<<<<<< HEAD
     public static final String sourcePath = "/benie.DESKTOP-K69F1U6/source/repos/io-backend/data/";
+=======
+    public static final String sourcePath = "/root/IO-server/io-backend/data/";
+>>>>>>> fcbdc1c32caa5f389fb97e59c77f719767d03289
     private final int MAX_FILE_UPLOAD_SIZE = 10 * 1024 * 1024; // 10 MB
     public static void main (String[] args) {
         SpringApplication.run(IoApplication.class, args);

@@ -30,7 +30,8 @@ public class Converter {
     }
 
     private int convertTxtToTex (String inputFileName, String outputFileName) throws IOException, InterruptedException {
-        String command = "pandoc " + sourcePath + inputFileName + " -f mediawiki -t latex --standalone -o" + sourcePath + outputFileName;
+        String command = "pandoc " + sourcePath + inputFileName + " -f mediawiki -t latex --standalone -o " + sourcePath + outputFileName;
+        System.out.println(command);
         System.out.println("Converting .txt -> .tex");
         Process pr1 = Runtime.getRuntime().exec(command);
         processIndicator(pr1);
@@ -40,7 +41,8 @@ public class Converter {
 
     private int convertTxtToPdf (String inputFileName, String outputFileName) throws IOException, InterruptedException {
         String command = "pandoc -s " + sourcePath + inputFileName + " -o " + sourcePath + outputFileName;
-        System.out.println("Converting .tex -> .pdf");
+        System.out.println(command);
+        System.out.println("Converting .txt -> .pdf");
         Process pr2 = Runtime.getRuntime().exec(command);
         processIndicator(pr2);
         processEndCode(pr2.waitFor());
@@ -48,8 +50,9 @@ public class Converter {
     }
 
     private int convertTexToPdf (String inputFileName, String outputFileName) throws IOException, InterruptedException {
-        String command = "pandoc " + sourcePath + inputFileName + " --pdf-engine=xelatex -o" + sourcePath + outputFileName;
-        System.out.println("Converting .txt -> .pdf ");
+        String command = "pandoc " + sourcePath + inputFileName + " --pdf-engine=xelatex -o " + sourcePath + outputFileName;
+        System.out.println(command);
+        System.out.println("Converting .tex -> .pdf ");
         Process pr3 = Runtime.getRuntime().exec(command);
         processIndicator(pr3);
         processEndCode(pr3.waitFor());
@@ -57,8 +60,9 @@ public class Converter {
     }
 
     private int convertTexToTxt (String inputFileName, String outputFileName) throws IOException, InterruptedException {
-        String command = "pandoc -s" + sourcePath + inputFileName + " -o " + sourcePath + outputFileName;
-        System.out.println("Converting .tex -> .text ");
+        String command = "pandoc -s " + sourcePath + inputFileName + " -o " + sourcePath + outputFileName;
+        System.out.println(command);
+        System.out.println("Converting .tex -> .txt ");
         Process pr4 = Runtime.getRuntime().exec(command);
         processIndicator(pr4);
         processEndCode(pr4.waitFor());
@@ -67,7 +71,8 @@ public class Converter {
 
     private int convertTexToText (String inputFileName, String outputFileName) throws IOException, InterruptedException {
         String command = "pandoc -s " + sourcePath + inputFileName + " -o " + sourcePath + outputFileName;
-        System.out.println("Converting .text -> .html ");
+        System.out.println(command);
+        System.out.println("Converting .tex -> .text ");
         Process pr5 = Runtime.getRuntime().exec(command);
         processIndicator(pr5);
         processEndCode(pr5.waitFor());
@@ -76,6 +81,7 @@ public class Converter {
 
     private int convertTextToHtml (String inputFileName, String outputFileName) throws IOException, InterruptedException {
         String command = "pandoc " + sourcePath + inputFileName + " -s -o " + sourcePath + outputFileName;
+        System.out.println(command);
         System.out.println("Converting .text -> .html ");
         Process pr6 = Runtime.getRuntime().exec(command);
         processIndicator(pr6);

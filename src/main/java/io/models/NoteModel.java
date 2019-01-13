@@ -19,8 +19,6 @@ public class NoteModel extends AuditModel {
     @Column(name = "content")
     private String content;
 
-    @NotBlank
-    private String text;
 
 
     public String getTitle() {
@@ -37,14 +35,6 @@ public class NoteModel extends AuditModel {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 
     public Long getId() {

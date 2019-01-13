@@ -16,7 +16,7 @@ import javax.validation.Valid;
 public class AuthorController {
 
     @Autowired
-    NoteRepository noteRepository;git
+    NoteRepository noteRepository;
 
     @Autowired
     AuthorRepository authorRepository;

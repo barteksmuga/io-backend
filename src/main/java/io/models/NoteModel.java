@@ -1,7 +1,7 @@
 package io.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "note_io")
@@ -11,11 +11,11 @@ public class NoteModel extends AuditModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotNull
     @Column(name = "title")
     private String title;
 
-    @NotBlank
+    @NotNull
     @Column(name = "content")
     private String content;
 

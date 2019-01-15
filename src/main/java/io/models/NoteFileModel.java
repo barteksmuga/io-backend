@@ -10,11 +10,11 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.io.Serializable;
+
 
 @Entity
 @Table(name = "files")
-public class NoteFileModel implements Serializable {
+public class NoteFileModel extends AuditModel {
 
     @Id
     @GeneratedValue(generator = "uuid")

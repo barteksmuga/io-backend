@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@RestController("/note")
+@RestController("/note/author")
 public class AuthorController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class AuthorController {
         }).orElseThrow(() -> new ResourceNotFoundException("NoteId " + noteId + " not found"));
     }
 
-    @PutMapping("/note/{noteId}/authors/{authorId}")
+    @PutMapping("/{noteId}/authors/{authorId}")
     public AuthorModel updateAuthor(@PathVariable(name = "noteId") Long noteId,
                                @PathVariable(name = "authorId") Long authorId,
                                @Valid @RequestBody AuthorModel authorReq) {
@@ -51,7 +51,7 @@ public class AuthorController {
         }).orElseThrow(() -> new ResourceNotFoundException("AuthorId " + authorId + " not found"));
     }
 
-    @DeleteMapping("/note/{noteId}/authors/{authorId}")
+    @DeleteMapping("/{noteId}/authors/{authorId}")
     public ResponseEntity<?> deleteAuthor(@PathVariable (name="noteId") Long noteId,
                                           @PathVariable (name="authorId") Long authorId){
         if(!authorRepository.existsById(authorId))

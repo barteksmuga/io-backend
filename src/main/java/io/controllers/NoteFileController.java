@@ -20,28 +20,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 
-@RestController
+@RestController("/note/file")
 public class NoteFileController {
-    private static final Logger logger = LoggerFactory.getLogger(NoteFileController.class);
+//    private static final Logger logger = LoggerFactory.getLogger(NoteFileController.class);
 
     @Autowired
     private NoteFileStorageService storageService;
 
     @Autowired
     private NoteRepository noteRepository;
-
-    @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-        NoteFileModel noteFileModel = storageService.storeFile(file);
-
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(noteFileModel.getId())
-                .toUriString();
-
-        return new UploadFileResponse(noteFileModel.getFileName(), fileDownloadUri,
-                file.getContentType(), file.getSize());
-    }
 
     @PostMapping("/note/{noteId}/uploadFile")
     public UploadFileResponse createFiles(@PathVariable(value = "noteId") Long noteId,

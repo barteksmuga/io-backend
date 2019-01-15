@@ -19,25 +19,8 @@ public class NoteFileStorageService {
     @Autowired
     private NoteFileRepository noteFileRepository;
 
-    public NoteFileModel storeFile(MultipartFile file){
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
-        try{
-            if(fileName.contains("..")) {
-                throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
-            }
-            NoteFileModel noteFileModel= new NoteFileModel(fileName,file.getContentType(),file.getBytes());
-
-            return noteFileRepository.save(noteFileModel);
-
-        } catch (IOException e) {
-            throw  new FileStorageException("Could not store file " + fileName + ". Please try again!", e);
-        }
-    }
-
     public NoteFileModel storeFileNote(MultipartFile file, NoteModel note){
         String fileName=StringUtils.cleanPath(file.getOriginalFilename());
-
 
         try{
             if(fileName.contains("..")){
@@ -58,6 +41,8 @@ public class NoteFileStorageService {
 
     public void deleteFile(String fileId){
         NoteFileModel noteFileModel=noteFileRepository.findById(fileId)
-                .orElseThrow(() -> new ResourceNotFoundException("File", "id", fileId));
+                .orElseThrow(() -> new ResourceNotFoundException("File"+ "id"+ fileId));
+
+        noteFileRepository.delete(noteFileModel);
     }
 }

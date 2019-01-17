@@ -1,9 +1,9 @@
 package io.controllers;
 
-
 import io.exceptions.models.ResourceNotFoundException;
 import io.models.NoteModel;
 import io.repositories.NoteRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,52 +12,55 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/note")
 public class NoteController {
-
+    private final static Logger logger = Logger.getLogger(FileDownloadController.class);
     @Autowired
     NoteRepository noteRepository;
 
-    @GetMapping("/getAll")
+    @GetMapping("/displayAll")
     public List<NoteModel> getAllNotes() {
+        logger.info("GET, display all notes");
         return noteRepository.findAll();
     }
 
-    @GetMapping("/getById/{id}")
-    public NoteModel getNoteById(@PathVariable(value = "id") Long noteId){
+    @GetMapping("/{id}")
+    public NoteModel getNoteById(@PathVariable(value = "id") Long noteId) {
+        logger.info("GET, get note by id, noteId: ["+noteId+"]");
         return noteRepository.findById(noteId)
-                .orElseThrow(()-> new ResourceNotFoundException("Name", "Last", "Empty", noteId));
+                .orElseThrow(() -> new ResourceNotFoundException("Name", "id", noteId));
     }
 
-    @PostMapping("/post")
+    @PostMapping("/addNew")
     public NoteModel createNote(@Valid @RequestBody NoteModel note) {
+        logger.info("POST, create new note");
         return noteRepository.save(note);
     }
 
-    @PutMapping("/put/{id}")
+    @PutMapping("/{id}")
     public NoteModel updateNote(@PathVariable(value = "id") Long noteId,
-                                @Valid @RequestBody NoteModel noteDetails){
+                                @Valid @RequestBody NoteModel noteDetails) {
         NoteModel note = noteRepository.findById(noteId)
-                .orElseThrow(() -> new ResourceNotFoundException("Name", "Last","Empty", noteId));
+                .orElseThrow(() ->new ResourceNotFoundException("Name", "id", noteId));
 
-        note.setFirstName(noteDetails.getFirstName());
-        note.setLastName(noteDetails.getLastName());
-        note.setText(noteDetails.getText());
+        note.setTitle(noteDetails.getTitle());
+        note.setContent(noteDetails.getContent());
+
 
         NoteModel updatedNote = noteRepository.save(note);
+        logger.info("PUT, update note by id, noteId: ["+noteId+"]");
         return updatedNote;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteNote(@PathVariable(value = "id") Long noteId){
-        NoteModel noteModel=noteRepository.findById(noteId)
-                .orElseThrow(()-> new ResourceNotFoundException("Name", "Last","Empty", noteId));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteNote(@PathVariable(value = "id") Long noteId) {
+        NoteModel noteModel = noteRepository.findById(noteId)
+                .orElseThrow(() -> new ResourceNotFoundException("Name", "id", noteId));
 
         noteRepository.delete(noteModel);
-
+        logger.info("DELETE, delete note by id, noteId: ["+noteId+"]");
         return ResponseEntity.ok().build();
     }
 

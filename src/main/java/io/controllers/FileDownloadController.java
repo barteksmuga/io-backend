@@ -4,6 +4,7 @@ import io.exceptions.models.FileDownloadFailedException;
 import io.exceptions.models.FileUploadFailedException;
 import io.repositories.FileRepository;
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -30,6 +31,7 @@ import java.util.List;
 public class FileDownloadController {
     @Autowired
     private FileRepository fileRepository;
+    private final static Logger logger = Logger.getLogger(FileDownloadController.class);
 
     @RequestMapping(path = "/download", method = RequestMethod.GET)
     public ResponseEntity<Resource> downloadSingleFile(@RequestParam("file") String fileName, HttpServletResponse response) throws IOException, FileUploadFailedException, FileDownloadFailedException {
@@ -49,6 +51,7 @@ public class FileDownloadController {
         try{
             resource = new ByteArrayResource(Files.readAllBytes(path));
         } catch (NoSuchFileException e) {
+            logger.error(e.getMessage());
             throw new FileDownloadFailedException("Such file doesn't exist.");
         }
 
@@ -60,9 +63,11 @@ public class FileDownloadController {
             IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException ex) {
+            logger.error(ex.getMessage());
             throw new RuntimeException("IOError writing file to output stream");
         }
 
+        logger.info("Download file by file name, fileName: ["+fileName+"]");
         return ResponseEntity.ok()
                 .contentLength(file.length())
                 .contentType(MediaType.parseMediaType("application/octet-stream"))

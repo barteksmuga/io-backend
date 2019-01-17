@@ -6,7 +6,7 @@ import io.models.NoteModel;
 import io.payload.UploadFileResponse;
 import io.repositories.NoteRepository;
 import io.service.NoteFileStorageService;
-import org.slf4j.Logger;
+import org.apache.log4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -22,7 +22,7 @@ import javax.validation.Valid;
 
 @RestController("/note/file")
 public class NoteFileController {
-//    private static final Logger logger = LoggerFactory.getLogger(NoteFileController.class);
+    private final static org.apache.log4j.Logger logger = Logger.getLogger(NoteFileController.class);
 
     @Autowired
     private NoteFileStorageService storageService;
@@ -41,13 +41,14 @@ public class NoteFileController {
                     .path("/downloadFile/")
                     .path(noteFileModel.getId())
                     .toUriString();
-
+            logger.info("POST, create file by note id, noteId: ["+noteId+"]");
             return noteRepository.findById(noteId).map(note -> {
                 noteFileModel.setNote(note);
                 return new UploadFileResponse(noteFileModel.getFileName(), fileDownloadUri,
                         file.getContentType(), file.getSize());
             }).orElseThrow(() -> new ResourceNotFoundException("NoteId " + noteId + " not found"));
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new ResourceNotFoundException("NoteId " + noteId + " not found");
         }
     }
@@ -55,7 +56,7 @@ public class NoteFileController {
     @GetMapping("/downloadFile/{fileId}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileId){
         NoteFileModel noteFileModel=storageService.getFile(fileId);
-
+        logger.info("GET, download file by file id, fileId: ["+fileId+"]");
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(noteFileModel.getFileType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + noteFileModel.getFileName() + "\"")
@@ -65,6 +66,7 @@ public class NoteFileController {
     @DeleteMapping("/deleteFile/{fileId}")
     public ResponseEntity<String> deleteFile(@PathVariable String fileId){
         storageService.deleteFile(fileId);
+        logger.info("DELETE, delete file by file id, fileId: ["+fileId+"]");
         return ResponseEntity.ok().body("Succes");
     }
 }

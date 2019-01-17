@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/note")
 public class NoteController {
-    private final static Logger logger = Logger.getLogger(FileDownloadController.class);
+    private final static Logger logger = Logger.getLogger(NoteController.class);
     @Autowired
     NoteRepository noteRepository;
 

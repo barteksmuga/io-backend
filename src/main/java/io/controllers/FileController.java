@@ -33,7 +33,7 @@ import java.util.Optional;
 @RequestMapping("/api/file")
 @Controller
 public class FileController {
-    public final static String UPLOAD_LOCATION = "/root/IO-server/io-backend/data/";
+    public final static String UPLOAD_LOCATION = "storage/";
     private final static Logger logger = Logger.getLogger(FileController.class);
 
     @Autowired

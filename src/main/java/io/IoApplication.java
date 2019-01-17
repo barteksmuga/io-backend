@@ -19,7 +19,7 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:application.example.properties")
 public class IoApplication {
 
-    public static final String sourcePath = "/root/IO-server/io-backend/data/";
+    public static final String sourcePath = "storage/";
     private final int MAX_FILE_UPLOAD_SIZE = 10 * 1024 * 1024; // 10 MB
     public static void main (String[] args) {
         SpringApplication.run(IoApplication.class, args);

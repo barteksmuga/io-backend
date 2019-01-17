@@ -13,13 +13,12 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "files")
+@Table(name = "note_files")
 public class NoteFileModel extends AuditModel {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
     @Column(name = "file_name")
     private String fileName;
@@ -52,11 +51,11 @@ public class NoteFileModel extends AuditModel {
         this.note = note;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

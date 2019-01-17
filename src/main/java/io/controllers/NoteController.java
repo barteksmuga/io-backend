@@ -34,8 +34,9 @@ public class NoteController {
     }
 
     @PostMapping("/addNew")
-    public NoteModel createNote(@Valid @RequestBody NoteModel note) {
+    public NoteModel createNote(@RequestParam("title") String title, @RequestParam("content") String content) {
         logger.info("POST, create new note");
+        NoteModel note = new NoteModel(title, content);
         return noteRepository.save(note);
     }
 

@@ -2,10 +2,11 @@ package io.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "note_io")
-public class NoteModel extends AuditModel {
+public class NoteModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +20,10 @@ public class NoteModel extends AuditModel {
     @Column(name = "content")
     private String content;
 
-
+    public NoteModel(@NotNull String title, @NotNull String content) {
+        this.title = title;
+        this.content = content;
+    }
 
     public String getTitle() {
         return title;

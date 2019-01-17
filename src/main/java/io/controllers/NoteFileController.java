@@ -14,6 +14,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -39,7 +40,7 @@ public class NoteFileController {
 
             String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/downloadFile/")
-                    .path(noteFileModel.getId())
+                    .path(Long.toString(noteFileModel.getId()))
                     .toUriString();
             logger.info("POST, create file by note id, noteId: ["+noteId+"]");
             return noteRepository.findById(noteId).map(note -> {
